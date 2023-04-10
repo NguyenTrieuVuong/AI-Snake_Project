@@ -14,12 +14,8 @@ public class MyFrame extends JFrame {
 	static final int SCREEN_HEIGHT = 600;
 	private JPanel contentPane;
 	private GamePanel gamePanel;
-	private MultiplayerPanel multiplayerPanel;
-	private SingleAIPanel singleAIPanel;
 	private AStarAIPanel aStarAIPanel;
 	private GameOverPanel GOPanel;
-	private GOMultiplayerPanel GOMP;
-	private GOSingleAIPanel GOSAI;
 	private GOAStarPanel GOAS;
 	private MenuPanel MPanel = new MenuPanel(SCREEN_WIDTH, SCREEN_HEIGHT, this);
 	CardLayout cardLayout = new CardLayout();
@@ -58,48 +54,6 @@ public class MyFrame extends JFrame {
 		gamePanel.requestFocusInWindow();
 	}
 	
-	public void multiplayer() {
-		multiplayerPanel = new MultiplayerPanel(this, SCREEN_WIDTH, SCREEN_HEIGHT);
-		contentPane.add(multiplayerPanel, "Multiplayer Panel");
-        cardLayout.next(contentPane);
-		contentPane.remove(MPanel);
-		multiplayerPanel.requestFocusInWindow();
-	}
-
-	public void gameOverMultiplayer(GOMultiplayerPanel GOMP) {
-		this.GOMP = GOMP;
-		contentPane.add(GOMP, "GameOver Multiplayer Panel");
-        cardLayout.next(contentPane);
-	}
-
-	public void playAgainMultiplayer() {
-		cardLayout.next(contentPane);
-		multiplayerPanel.restart();
-		contentPane.remove(GOMP);
-		multiplayerPanel.requestFocusInWindow();
-	}
-
-	public void singleAI() {
-		singleAIPanel = new SingleAIPanel(this, SCREEN_WIDTH, SCREEN_HEIGHT);
-		contentPane.add(singleAIPanel, "Single AI Panel");
-        cardLayout.next(contentPane);
-		contentPane.remove(MPanel);
-		singleAIPanel.requestFocusInWindow();
-	}
-	
-	public void gameOverSingleAI(GOSingleAIPanel GOSAI) {
-		this.GOSAI = GOSAI;
-		contentPane.add(GOSAI, "GameOver Single AI Panel");
-        cardLayout.next(contentPane);
-	}
-	
-	public void playAgainSingleAI() {
-		cardLayout.next(contentPane);
-		singleAIPanel.restart();
-		contentPane.remove(GOSAI);
-		singleAIPanel.requestFocusInWindow();
-	}
-
 	public void aStarAI() {
 		aStarAIPanel = new AStarAIPanel(this, SCREEN_WIDTH, SCREEN_HEIGHT);
 		contentPane.add(aStarAIPanel, "A* AI Panel");

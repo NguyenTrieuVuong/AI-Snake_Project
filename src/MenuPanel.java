@@ -35,22 +35,6 @@ public class MenuPanel extends JPanel {
 		sp.addActionListener(new SinglePlayerListener(frame));
 		add(sp);
 		
-		JButton mp = new JButton("MultiPlayer");
-		mp.setLayout(null);
-		mp.setBounds((width / 2) - 100, (height / 4) + 175 - 30, 200, 60);
-		mp.setBackground(Color.GREEN);
-		mp.setBorder(BorderFactory.createBevelBorder(0));
-		mp.addActionListener(new MultiplayerListener(frame));
-		add(mp);
-		
-		JButton sAI = new JButton("Single AI");
-		sAI.setLayout(null);
-		sAI.setBounds((width / 2) - 100, (height / 4) + 250 - 30, 200, 60);
-		sAI.setBackground(Color.GREEN);
-		sAI.setBorder(BorderFactory.createBevelBorder(0));
-		sAI.addActionListener(new SingleAIListener(frame));
-		add(sAI);
-		
 		JButton Astar = new JButton("A* AI");
 		Astar.setLayout(null);
 		Astar.setBounds((width / 2) - 100, (height / 4) + 325 - 30, 200, 60);
