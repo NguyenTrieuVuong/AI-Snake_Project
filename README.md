@@ -16,11 +16,14 @@ Dùng thuật toán tìm kiếm A* tạo game rắn tự động. Con rắn đư
 
 
 ## Background:
-+ Giao diện bắt đầu
+  + Giao diện bắt đầu
+  
 ![Giao diện bắt đầu](images/background_start.png)
-+ Giao diện vào game
+  + Giao diện vào game
+  
 ![Giao diện vào game](images/background_playgame.png)
-+ Giao diện trò chơi kết thúc
+  + Giao diện trò chơi kết thúc
+  
 ![Giao diện trò chơi kết thúc](images/background_gameover.png)
 
 
