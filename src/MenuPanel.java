@@ -27,13 +27,13 @@ public class MenuPanel extends JPanel {
 		setBackground(Color.BLACK);
 		setLayout(null);
 		
-		JButton sp = new JButton("SinglePlayer");
-		sp.setLayout(null);
-		sp.setBounds((width / 2) - 100, (height / 4) + 100 - 30, 200, 60);
-		sp.setBackground(Color.GREEN);
-		sp.setBorder(BorderFactory.createBevelBorder(0));
-		sp.addActionListener(new SinglePlayerListener(frame));
-		add(sp);
+		JButton sAI = new JButton("Single AI");
+		sAI.setLayout(null);
+		sAI.setBounds((width / 2) - 100, (height / 4) + 250 - 30, 200, 60);
+		sAI.setBackground(Color.GREEN);
+		sAI.setBorder(BorderFactory.createBevelBorder(0));
+		sAI.addActionListener(new SingleAIListener(frame));
+		add(sAI);
 		
 		JButton Astar = new JButton("A* AI");
 		Astar.setLayout(null);

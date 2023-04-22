@@ -16,7 +16,9 @@ Dùng thuật toán tìm kiếm A* tạo game rắn tự động. Con rắn đư
 
 
 ## Background:
-
+![Giao diện trò chơi kết thúc](images/background_gameover.png)
+![Giao diện vào game](images/background_playgame.png)
+![Giao diện bắt đầu](images/background_start.png)
 
 
 ## Kết Luận: 

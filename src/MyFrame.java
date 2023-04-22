@@ -14,8 +14,10 @@ public class MyFrame extends JFrame {
 	static final int SCREEN_HEIGHT = 600;
 	private JPanel contentPane;
 	private GamePanel gamePanel;
+	private SingleAIPanel singleAIPanel;
 	private AStarAIPanel aStarAIPanel;
 	private GameOverPanel GOPanel;
+	private GOSingleAIPanel GOSAI;
 	private GOAStarPanel GOAS;
 	private MenuPanel MPanel = new MenuPanel(SCREEN_WIDTH, SCREEN_HEIGHT, this);
 	CardLayout cardLayout = new CardLayout();
@@ -45,15 +47,28 @@ public class MyFrame extends JFrame {
 		contentPane.remove(GOPanel);
 		gamePanel.requestFocusInWindow();
 	}
-	
-	public void singlePlayer() {
-		gamePanel = new GamePanel(this, SCREEN_WIDTH, SCREEN_HEIGHT);
-		contentPane.add(gamePanel, "Game Panel");
+
+	public void singleAI() {
+		singleAIPanel = new SingleAIPanel(this, SCREEN_WIDTH, SCREEN_HEIGHT);
+		contentPane.add(singleAIPanel, "Single AI Panel");
         cardLayout.next(contentPane);
 		contentPane.remove(MPanel);
-		gamePanel.requestFocusInWindow();
+		singleAIPanel.requestFocusInWindow();
 	}
 	
+	public void gameOverSingleAI(GOSingleAIPanel GOSAI) {
+		this.GOSAI = GOSAI;
+		contentPane.add(GOSAI, "GameOver Single AI Panel");
+        cardLayout.next(contentPane);
+	}
+	
+	public void playAgainSingleAI() {
+		cardLayout.next(contentPane);
+		singleAIPanel.restart();
+		contentPane.remove(GOSAI);
+		singleAIPanel.requestFocusInWindow();
+	}
+
 	public void aStarAI() {
 		aStarAIPanel = new AStarAIPanel(this, SCREEN_WIDTH, SCREEN_HEIGHT);
 		contentPane.add(aStarAIPanel, "A* AI Panel");
