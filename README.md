@@ -15,7 +15,7 @@ Dùng thuật toán tìm kiếm A* tạo game rắn tự động. Con rắn đư
 
 
 
-## Backgrourd ( chụp hình đoạn app chạy) 
+## Background:
 
 
 
