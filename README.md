@@ -30,3 +30,6 @@ Dùng thuật toán tìm kiếm A* tạo game rắn tự động. Con rắn đư
 ## Kết Luận: 
  + thành quả
  + ưu nhược điểm 
+
+## Tài liệu tham khảo:
+  + https://youtu.be/0ims0c2fVlM
