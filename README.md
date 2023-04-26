@@ -32,5 +32,5 @@ Dùng thuật toán tìm kiếm A* tạo game rắn tự động. Con rắn đư
  + ưu nhược điểm 
 
 ## Tài liệu tham khảo:
-  + https://youtu.be/0ims0c2fVlM
+  + https://github.com/GreenSlime96/PathFinding
   + https://github.com/NguyenTrieuVuong/SnakeGame
