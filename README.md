@@ -28,8 +28,8 @@ Dùng thuật toán tìm kiếm A* tạo game rắn tự động. Con rắn đư
 
 
 ## Kết Luận: 
- + thành quả: - Tạo được thành công game rắn tự động
- + ưu nhược điểm:
+ + Thành quả: - Tạo được thành công game rắn tự động
+ + Ưu / nhược điểm:
   + ưu điểm: - Chế độ chơi thú vị và chân thật: Tạo trò chơi rắn ăn mồi tự động sử dụng thuật toán A* giúp tạo ra một trò chơi thú vị, có tính thử thách và giống như                  chơi với người thật.
              - Tăng khả năng tư duy của người chơi: Trò chơi này đòi hỏi người chơi có khả năng suy nghĩ logic, tính toán, đặc biệt là phát triển khả năng giải quyết                  vấn đề.
              - Tăng cường tính tương tác: Trò chơi cho phép người chơi tương tác với môi trường, tạo ra lối chơi tự do, góp phần giúp người chơi thoải mái thư giãn và                giải trí.
