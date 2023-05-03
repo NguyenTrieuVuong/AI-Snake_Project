@@ -1,5 +1,8 @@
 // package Game;
 
+/*
+ The code below displays the menu, in which the class MyFrame performs 2 choices: A* AI and Single AI
+ */
 
 import java.awt.Color;
 import java.awt.Dimension;

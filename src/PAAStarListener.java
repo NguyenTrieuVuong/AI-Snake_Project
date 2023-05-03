@@ -1,5 +1,7 @@
 // package Game;
-
+/*
+The code below allows A* AI Snake to play again when the game is over
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

@@ -1,5 +1,8 @@
 // package Game;
 
+/*
+The code below display A* AI's game over panel when the game is over
+ */
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;

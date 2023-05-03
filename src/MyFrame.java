@@ -1,5 +1,9 @@
 // package Game;
 
+/*
+The code below displays start game GUI, there are 2 choices: Single AI and A* AI. The code also calls some functions
+in that 2 choices Single AI and A* AI 
+ */
 import java.awt.CardLayout;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;

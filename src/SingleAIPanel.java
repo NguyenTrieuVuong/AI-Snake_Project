@@ -1,5 +1,42 @@
 // package Game;
 
+/*
+ This code appears to be a part of a snake game. It is a method called "pathFinder" that is responsible for 
+ determining the direction in which the snake should move in order to reach the apple. The algorithm used 
+ for determining the path is A* algorithm. The A* algorithm uses a heuristic function to estimate the cost 
+ from the current position to the goal position, and then chooses the lowest cost path to reach the goal position.
+
+The code initializes several variables to be used in the algorithm. The variables include hCostA, hCostB, 
+hCostC, xDistance, yDistance, blocked, fCostA, fCostB, and fCostC. The variables hCostA, hCostB, and hCostC 
+represent the estimated cost from the current position to the goal position when moving in three different 
+directions (up, left, and right). The variables xDistance and yDistance represent the distance between the 
+current position and the goal position in the x and y directions. The variable blocked is used to check if 
+the snake's body is blocking the path. The variables fCostA, fCostB, and fCostC represent the total cost 
+from the start position to the goal position when moving in three different directions. 
+
+The code then checks the direction in which the snake is moving. If the direction is up, the code checks 
+if the snake can move up, left, or right. It first checks if the snake can move up. If it can move up, it 
+checks if there are any body parts blocking the way. If there are no body parts blocking the way, it calculates 
+the estimated cost of moving up to the goal position. The estimated cost is calculated by adding the distance 
+between the current position and the goal position in the x and y directions, multiplied by 10, to the heuristic 
+cost hCostA. The heuristic cost hCostA is set to 4 if the distance in the y direction is not zero. The total 
+cost fCostA is then calculated by adding the heuristic cost hCostA and the cost of moving up, which is 10.
+
+The code then checks if the snake can move left or right, and if it can, it calculates the estimated cost 
+of moving in that direction and the total cost of moving in that direction. Finally, the code checks which 
+direction has the lowest total cost and sets the direction of the snake accordingly.
+
+If the snake is moving down, the code follows a similar procedure as for moving up. The code checks if the 
+snake can move down, left, or right. If it can move down, it calculates the estimated cost of moving down 
+to the goal position. The heuristic cost hCostA is set to 4 if the distance in the y direction is not zero. 
+The total cost fCostA is then calculated by adding the heuristic cost hCostA and the cost of moving down, 
+which is 10. The code then checks if the snake can move left or right, and if it can, it calculates the 
+estimated cost of moving in that direction and the total cost of moving in that direction. Finally, the code 
+checks which direction has the lowest total cost and sets the direction of the snake accordingly.
+
+The code updates the fCostA, fCostB, and fCostC variables to their initial values at the end of the pathFinder 
+method, ready for the next iteration.
+ */
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -17,7 +54,7 @@ public class SingleAIPanel extends JPanel implements ActionListener {
 	final int SCREEN_HEIGHT;
 	static final int UNIT_SIZE = 25;
 	final int GAME_UNITS;
-	static final int DELAY = 75;
+	static final int DELAY = 45;
 	final int x[];
 	final int y[];
 	int bodyParts = 6;

@@ -1,4 +1,23 @@
 // package Game;
+/*
+"The code below defines a "Node" class to represent a point in a grid used in pathfinding algorithms. 
+The Node class is implemented according to the Comparable interface to allow Node objects to be compared 
+with each other based on fCost (the total cost from the start point to the destination). The properties 
+of the Node class are explained as follows:
+
+- xAxis: x-coordinate of the Node in the grid.
+- yAxis: y-coordinate of the Node in the grid.
+- gCost: cost from start Node to current Node.
+- hCost: estimated cost from current Node to destination (heuristic).
+- fCost: total cost (gCost + hCost) to go from start Node to current Node and to destination.
+- parent: parent Node of current Node in best path from start Node.
+- walkable: boolean variable representing ability to pass through this Node.
+- direction: direction to go to current Node from parent Node (L, R, U, D).
+- Closed: boolean variable representing state of Node in pathfinding algorithm."
+The code below also provides methods for manipulating the properties of the Node class such as set/get 
+cost values, set parent Node, calculate fCost, close Node, compare Nodes with each other, determine state 
+of Node, etc.
+ */
 
 public class Node implements Comparable<Node> {
 	

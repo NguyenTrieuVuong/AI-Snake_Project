@@ -1,5 +1,44 @@
 // package Game;
 
+/*
+ The code below implements the A* algorithm to find the shortest path from the current position to the target 
+ on a 2D grid. The nodes in the grid are represented by Node objects, each containing information about the 
+ node's coordinates, the cost values (gCost) and heuristic function (hCost) required for calculating its total 
+ cost (fCost).
+
+The A* algorithm is implemented using a priority queue to store the nodes that need to be considered. When 
+starting, the current node is created from the initial position and added to the queue. During the search, 
+the algorithm looks for neighboring nodes of the current node to add to the priority queue. The neighboring 
+nodes are added to the priority queue based on their total cost (fCost). When the target node is found, the 
+algorithm returns a list of the parent nodes of the target node to determine the path.
+
+Some variables used in the code are:
+- parents: A list of the parent nodes of the target node (returned when the path is found).
+- open: A priority queue containing the nodes that need to be considered.
+- closed: A list of nodes that have been considered.
+- count: The number of times nodes are traversed during the search.
+- gCost: The cost of moving from the current node to the next node (values updated based on the direction of movement).
+- startNode: The initial node created from the initial position and added to the priority queue.
+- goalNode: The target node created from the coordinates of the target and used to check if the path has been found.
+- SCREEN_WIDTH and SCREEN_HEIGHT: The screen size.
+- UNIT_SIZE: The size of each cell in the grid.
+- x[] and y[]: Arrays containing the coordinates of cells in the grid.
+- isBlocked(): A method to check if a cell is blocked or not.
+- findHCost(): A heuristic function to calculate the heuristic cost function for each node.
+
+The `findHCost(int xAxis, int yAxis)` method calculates the "heuristic" cost (h-cost) of reaching the apple 
+at a particular `xAxis` and `yAxis` position. This cost is calculated as the Manhattan distance between the 
+current position and the apple position, which is the sum of the absolute differences in the x-axis and y-axis 
+between the two positions. The method also takes into account whether the character must move vertically to 
+reach the apple, in which case it adds 4 to the cost.
+
+The `pathFinder()` method determines the best direction for the character to move to reach the apple. It 
+first calculates the h-cost for three possible moves: up, left, and right. For each possible move, it checks 
+whether the character's path would be blocked by its own body or the edges of the screen. If the path is not 
+blocked, it calculates the f-cost for that move. The f-cost is the sum of the g-cost (distance from current 
+position to new position) and the h-cost (calculated by calling `findHCost()`). It then chooses the move with 
+the lowest f-cost, updates the character's direction, and resets the f-cost variables. 
+ */
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -107,8 +146,6 @@ public class AStarAIPanel extends JPanel implements ActionListener  {
 		appleX = random.nextInt((int)(SCREEN_WIDTH/UNIT_SIZE)) * UNIT_SIZE;	
 		appleY = random.nextInt((int)(SCREEN_HEIGHT/UNIT_SIZE)) * UNIT_SIZE;	
 		fixApple();
-
-		System.out.println(appleX + " , " + appleY); // 575 it stops working
 
 		List<Node> path = aStar();
 		if (path == null) {
@@ -268,7 +305,6 @@ public class AStarAIPanel extends JPanel implements ActionListener  {
 			closed.add(current);
 			
 			if (count > (SCREEN_WIDTH / UNIT_SIZE) * (SCREEN_HEIGHT / UNIT_SIZE) * 10) {
-				System.out.println("Couldnt find path");
 				return null;
 			}
 			

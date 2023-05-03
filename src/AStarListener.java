@@ -1,5 +1,8 @@
 // package Game;
 
+/*
+ The code below allow the A* to perform A* AI panel
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

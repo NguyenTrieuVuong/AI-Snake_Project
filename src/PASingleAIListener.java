@@ -1,5 +1,8 @@
 // package Game;
 
+/*
+The code below allows Single AI Snake to play again when the game is over
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
