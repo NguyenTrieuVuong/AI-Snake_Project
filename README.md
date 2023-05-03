@@ -4,7 +4,7 @@
   + Hoàng Mạnh Hùng
   + Trần Bỉnh Hướng
   + Nguyễn Triệu Vương
-  + Nguyễn Bá Kiên Lợn
+  + Nguyễn Bá Kiên
 ## Giới thiệu:
 Trò chơi con rắn là một trò chơi phổ biến cách đây khoảng mười năm cũng là một trò chơi yêu thích của chúng tôi vì thế chúng tôi đã kết hợp trò chơi yêu thích và ngành học để tái hiện lại trò chơi con rắn.
 
