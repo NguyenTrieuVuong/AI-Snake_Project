@@ -9,8 +9,8 @@
 Trò chơi con rắn là một trò chơi phổ biến cách đây khoảng mười năm cũng là một trò chơi yêu thích của chúng tôi vì thế chúng tôi đã kết hợp trò chơi yêu thích và ngành học để tái hiện lại trò chơi con rắn.
 
 ## Ý tưởng: 
-
-Dùng thuật toán tìm kiếm A* tạo game rắn tự động. Con rắn được bao quanh bởi 4 bức tường, mồi mới xuất hiện ngẫu nhiên 1 vị trí sau khi rắn ăn mồi cũ. Trò chơi kết thúc khi rắn đâm vào bức tường hoặc đâm vào thân/đuôi chính mình. Mục tiêu của chúng tôi là trò chơi con rắn chơi được ở 2 chế độ là người chơi và máy chơi. Chúng tôi áp dụng tìm kiếm A* trong bài để tìm kiếm.
+- Phát triển từ sản phẩm game rắn săn mồi đã được làm trong môn Lập trình hướng đối tượng.
+- Dùng thuật toán tìm kiếm A* tạo game rắn tự động. Con rắn được bao quanh bởi 4 bức tường, mồi mới xuất hiện ngẫu nhiên 1 vị trí sau khi rắn ăn mồi cũ. Trò chơi kết thúc khi rắn đâm vào bức tường hoặc đâm vào thân/đuôi chính mình. Mục tiêu của chúng tôi là trò chơi con rắn chơi được ở 2 chế độ là người chơi và máy chơi. Chúng tôi áp dụng tìm kiếm A* trong bài để tìm kiếm.
 
 ## Tìm kiếm A* là gì? (A* algorithm)
 A* là thuật toán tìm kiếm trong đồ thị, thuật toán sẽ tìm một đường tối ưu nhất từ vị trí ban đầu đến vị trí đích. Thuật toán sử dụng "đánh giá heurstic" để sắp xếp từng loại từng điểm đến để đến vị trị tốt nhất. Thuật toán sẽ duyệt qua các vị trí đích đích theo đánh giá của heuristic này.
