@@ -61,7 +61,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		this.frame = frame;
 		random = new Random();
 		setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-		setBackground(Color.BLACK);
+		setBackground(Color.BLUE);
 		setFocusable(true);
 		addKeyListener(keyAdapter);
 		startGame();
@@ -92,7 +92,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	public void draw(Graphics g) {
 		if (running) {
-			g.setColor(Color.WHITE);
+			g.setColor(Color.RED);
 			g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
 			timer.setDelay(DELAY);
 			for (int i = 0; i < bodyParts; i++) {
@@ -101,10 +101,10 @@ public class GamePanel extends JPanel implements ActionListener {
 					g.setColor(new Color(random.nextInt(255), random.nextInt(255), random.nextInt(255)));
 					g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
 				} else if (i == 0) {
-					g.setColor(Color.GREEN);
+					g.setColor(new Color(200, 200, 200));
 					g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
 				} else {
-					g.setColor(new Color(45, 180, 0));
+					g.setColor(new Color(255, 255, 255));
 					g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
 				}
 			}
@@ -113,7 +113,6 @@ public class GamePanel extends JPanel implements ActionListener {
 			FontMetrics metrics = getFontMetrics(g.getFont());
 			g.drawString("Score: " + applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score: " + applesEaten))/2, g.getFont().getSize());
 		} else {
-			gameOver(g);
 		}
 	}
 		
@@ -184,10 +183,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		if (!running) {
 			timer.stop();
 		}
-	}
-	
-	public void gameOver(Graphics g) {
-		((MyFrame) frame).gameOver(new GameOverPanel(applesEaten, SCREEN_WIDTH, SCREEN_HEIGHT, g, frame));
 	}
 
 	public void actionPerformed(ActionEvent event) {

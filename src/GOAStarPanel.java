@@ -30,7 +30,7 @@ public class GOAStarPanel extends JPanel  {
 		this.frame = frame;
 		
 		setPreferredSize(new Dimension(width, height));
-		setBackground(Color.BLACK);
+		setBackground(Color.BLUE);
 		setLayout(null);
 		
 		JButton againB = new JButton("Play Again?");

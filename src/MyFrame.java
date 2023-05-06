@@ -20,7 +20,6 @@ public class MyFrame extends JFrame {
 	private GamePanel gamePanel;
 	private SingleAIPanel singleAIPanel;
 	private AStarAIPanel aStarAIPanel;
-	private GameOverPanel GOPanel;
 	private GOSingleAIPanel GOSAI;
 	private GOAStarPanel GOAS;
 	private MenuPanel MPanel = new MenuPanel(SCREEN_WIDTH, SCREEN_HEIGHT, this);
@@ -39,19 +38,6 @@ public class MyFrame extends JFrame {
 		setLocationRelativeTo(null);
 	}
 	
-	public void gameOver(GameOverPanel GOPanel) {
-		this.GOPanel = GOPanel;
-		contentPane.add(GOPanel, "GameOver Panel");
-        cardLayout.next(contentPane);
-	}
-	
-	public void playAgain() {
-		cardLayout.next(contentPane);
-		gamePanel.restart();
-		contentPane.remove(GOPanel);
-		gamePanel.requestFocusInWindow();
-	}
-
 	public void singleAI() {
 		singleAIPanel = new SingleAIPanel(this, SCREEN_WIDTH, SCREEN_HEIGHT);
 		contentPane.add(singleAIPanel, "Single AI Panel");

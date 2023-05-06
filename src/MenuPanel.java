@@ -27,7 +27,7 @@ public class MenuPanel extends JPanel {
 		this.frame = frame;
 		
 		setPreferredSize(new Dimension(width, height));
-		setBackground(Color.BLACK);
+		setBackground(Color.BLUE);
 		setLayout(null);
 		
 		JButton sAI = new JButton("Single AI");
