@@ -18,7 +18,11 @@ Trò chơi con rắn là một trò chơi phổ biến cách đây khoảng mư�
 A* là thuật toán tìm kiếm trong đồ thị, thuật toán sẽ tìm một đường tối ưu nhất từ vị trí ban đầu đến vị trí đích. Thuật toán sử dụng "đánh giá heurstic" để sắp xếp từng loại từng điểm đến để đến vị trị tốt nhất. Thuật toán sẽ duyệt qua các vị trí đích đích theo đánh giá của heuristic này.
 
 ## Phương án triển khai công việc:
-  + Trước tiên dựng game bằng ngôn ngữ java, tiếp theo sẽ tạo con rắn và tạo mỗi ngẫu nhiên. Cuối cùng kết hợp thuật toán A* để cho con rắn tự động di chuyển.
+  + Trước tiên dựng game bằng ngôn ngữ java, 
+  + Tiếp theo sẽ tạo con rắn và tạo mỗi ngẫu nhiên. 
+  + (2 phần trên đã được học và hướng dẫn làm trong môn học 'lập trình hướng đối tượng')
+  + Cuối cùng kết hợp thuật toán A* để cho con rắn tự động di chuyển.
+  
 
 
 
