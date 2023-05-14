@@ -8,11 +8,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
-public class AStarListener implements ActionListener {
+public class AStarPQListener implements ActionListener {
 
 	JFrame frame;
 	
-	public AStarListener(JFrame frame) {
+	public AStarPQListener(JFrame frame) {
 		this.frame = frame;
 	}
 
@@ -20,7 +20,7 @@ public class AStarListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Thread thread = new Thread(){
 		    public void run(){
-				((MyFrame) frame).aStarAI();
+				((MyFrame) frame).AStarPQAI();
 		    }
 		  };
 

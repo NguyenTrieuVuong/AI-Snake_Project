@@ -1,7 +1,7 @@
 // package Game;
 
 /*
-The code below display A* AI's game over panel when the game is over
+The code below display Single AI's game over panel when the game is over
  */
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,14 +14,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class GOAStarPanel extends JPanel  {
-	
+public class GOAStarPanel extends JPanel {
 	int applesEaten;
 	int width;
 	int height;
 	Graphics g;
 	JFrame frame;
-
+	
 	public GOAStarPanel(int applesEaten, int width, int height, Graphics g, JFrame frame) {
 		this.applesEaten = applesEaten;
 		this.width = width;
@@ -38,10 +37,10 @@ public class GOAStarPanel extends JPanel  {
 		againB.setBounds((width / 2) - 100, (height - (height / 4)) - 30, 200, 60);
 		againB.setBackground(Color.GREEN);
 		againB.setBorder(BorderFactory.createBevelBorder(0));
-		againB.addActionListener(new PAAStarListener(frame));
+		againB.addActionListener(new PAAStarAIListener(frame));
 		add(againB);
 	}
-
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		draw(g);
@@ -59,4 +58,5 @@ public class GOAStarPanel extends JPanel  {
 		g.drawString("Game Over", (width - metrics2.stringWidth("Game Over"))/2, height / 2);
 	}
 	
+
 }

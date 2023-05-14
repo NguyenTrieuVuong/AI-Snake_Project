@@ -18,10 +18,10 @@ public class MyFrame extends JFrame {
 	static final int SCREEN_HEIGHT = 600;
 	private JPanel contentPane;
 	private GamePanel gamePanel;
-	private SingleAIPanel singleAIPanel;
-	private AStarAIPanel aStarAIPanel;
-	private GOSingleAIPanel GOSAI;
-	private GOAStarPanel GOAS;
+	private AStarAIPanel singleAIPanel;
+	private AStarPQAIPanel aStarAIPanel;
+	private GOAStarPanel GOSAI;
+	private GOAStarPQPanel GOAS;
 	private MenuPanel MPanel = new MenuPanel(SCREEN_WIDTH, SCREEN_HEIGHT, this);
 	CardLayout cardLayout = new CardLayout();
 
@@ -38,42 +38,42 @@ public class MyFrame extends JFrame {
 		setLocationRelativeTo(null);
 	}
 	
-	public void singleAI() {
-		singleAIPanel = new SingleAIPanel(this, SCREEN_WIDTH, SCREEN_HEIGHT);
-		contentPane.add(singleAIPanel, "Single AI Panel");
+	public void AStarAI() {
+		singleAIPanel = new AStarAIPanel(this, SCREEN_WIDTH, SCREEN_HEIGHT);
+		contentPane.add(singleAIPanel, "A* AI Panel");
         cardLayout.next(contentPane);
 		contentPane.remove(MPanel);
 		singleAIPanel.requestFocusInWindow();
 	}
 	
-	public void gameOverSingleAI(GOSingleAIPanel GOSAI) {
+	public void gameOverAStarAI(GOAStarPanel GOSAI) {
 		this.GOSAI = GOSAI;
-		contentPane.add(GOSAI, "GameOver Single AI Panel");
+		contentPane.add(GOSAI, "GameOver A* AI Panel");
         cardLayout.next(contentPane);
 	}
 	
-	public void playAgainSingleAI() {
+	public void playAgainAStarAI() {
 		cardLayout.next(contentPane);
 		singleAIPanel.restart();
 		contentPane.remove(GOSAI);
 		singleAIPanel.requestFocusInWindow();
 	}
 
-	public void aStarAI() {
-		aStarAIPanel = new AStarAIPanel(this, SCREEN_WIDTH, SCREEN_HEIGHT);
-		contentPane.add(aStarAIPanel, "A* AI Panel");
+	public void AStarPQAI() {
+		aStarAIPanel = new AStarPQAIPanel(this, SCREEN_WIDTH, SCREEN_HEIGHT);
+		contentPane.add(aStarAIPanel, "A* Priority Queue AI Panel");
         cardLayout.next(contentPane);
 		contentPane.remove(MPanel);
 		aStarAIPanel.requestFocusInWindow();
 	}
 
-	public void gameOverAStar(GOAStarPanel GOAS) {
+	public void gameOverAStarPQ(GOAStarPQPanel GOAS) {
 		this.GOAS = GOAS;
-		contentPane.add(GOAS, "GameOver A* Panel");
+		contentPane.add(GOAS, "GameOver A* Priority Queue Panel");
         cardLayout.next(contentPane);
 	}
 	
-	public void playAgainAStar() {
+	public void playAgainAStarPQ() {
 		cardLayout.next(contentPane);
 		aStarAIPanel.restart();
 		contentPane.remove(GOAS);

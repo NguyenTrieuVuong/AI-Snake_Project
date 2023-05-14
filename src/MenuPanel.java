@@ -30,20 +30,20 @@ public class MenuPanel extends JPanel {
 		setBackground(Color.BLUE);
 		setLayout(null);
 		
-		JButton sAI = new JButton("Single AI");
+		JButton sAI = new JButton("A* AI");
 		sAI.setLayout(null);
 		sAI.setBounds((width / 2) - 100, (height / 4) + 250 - 30, 200, 60);
 		sAI.setBackground(Color.GREEN);
 		sAI.setBorder(BorderFactory.createBevelBorder(0));
-		sAI.addActionListener(new SingleAIListener(frame));
+		sAI.addActionListener(new AStarAIListener(frame));
 		add(sAI);
 		
-		JButton Astar = new JButton("A* AI");
+		JButton Astar = new JButton("A* Priority Queue AI");
 		Astar.setLayout(null);
 		Astar.setBounds((width / 2) - 100, (height / 4) + 325 - 30, 200, 60);
 		Astar.setBackground(Color.GREEN);
 		Astar.setBorder(BorderFactory.createBevelBorder(0));
-		Astar.addActionListener(new AStarListener(frame));
+		Astar.addActionListener(new AStarPQListener(frame));
 		add(Astar);
 	}
 	
@@ -54,9 +54,13 @@ public class MenuPanel extends JPanel {
 	
 	public void draw(Graphics g) {
 		g.setColor(Color.RED);
-		g.setFont(new Font("Ink Free", Font.BOLD, 75));
+		g.setFont(new Font("Ink Free", Font.BOLD,30 ));
 		FontMetrics metrics = getFontMetrics(g.getFont());
-		g.drawString("SNAKE", (width - metrics.stringWidth("SNAKE"))/2, height / 4);
+		g.drawString("-Project of Group 2-", (width - metrics.stringWidth("Project of Group 2"))/2, height / 8);
+		g.setFont(new Font("Ink Free", Font.BOLD, 75));
+		FontMetrics metrics1 = getFontMetrics(g.getFont());
+		g.drawString("SNAKE GAME", (width - metrics1.stringWidth("SNAKE GAME"))/2, height / 4);
+		
 	}
 }
 
