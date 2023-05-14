@@ -1,7 +1,7 @@
 // package Game;
 
 /*
- The code below's purpose is to run all the Snake AI program
+ The below code's purpose is to run all the Snake AI program
  */
 import javax.swing.SwingUtilities;
 

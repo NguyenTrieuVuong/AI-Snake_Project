@@ -324,7 +324,13 @@ public class AStarAIPanel extends JPanel implements ActionListener  {
 			
 			// check neighbours
 			for (int i = 0; i < 3; i++) {
-				
+				/*The movement cost of 10 for vertical/horizontal movement and 14 for diagonal movement 
+				is based on the fact that this algorithm is using the A* search algorithm to find 
+				the shortest path to the apple for the snake in a grid-like environment. 
+				In a grid, the cost of moving in the vertical or horizontal direction is typically set to 1, 
+				as it involves moving to the neighboring cell in the same row or column. The cost of moving 
+				diagonally is typically set to sqrt(2) (approximately 1.4) as it involves moving to 
+				the neighboring cell in a diagonal direction.*/
 				if (i == 0) {
 					gCost = 10; // if current direction
 				} else {
@@ -470,6 +476,8 @@ public class AStarAIPanel extends JPanel implements ActionListener  {
 		hCost = 0;
 		xDistance = Math.abs((appleX - xAxis) / UNIT_SIZE);
 		yDistance = Math.abs((appleY - yAxis) / UNIT_SIZE);
+		/* If the yDistance (the absolute value of the difference in y-coordinates between the current node and the 
+		goal node) is not equal to zero, the algorithm assigns a heuristic cost of 4 to the movement.  */ 
 		if (yDistance != 0) {
 			hCost = 4;
 		}
@@ -482,9 +490,19 @@ public class AStarAIPanel extends JPanel implements ActionListener  {
 		int hCostB = 0;
 		int hCostC = 0;
 		boolean blocked = false;
-		int fCostA = 999999999;
-		int fCostB = 999999999;
-		int fCostC = 999999999;
+		/*Initializing the fCostA, fCostB, and fCostC variables to a very large number is a common practice 
+		in pathfinding algorithms, particularly in A* algorithm implementations. This is done because fCostA, 
+		fCostB, and fCostC represent the estimated total cost from the start node to the current node, and if 
+		a better path is found, these values will be updated with a lower cost. By initializing them to a very 
+		large number, any other value will be smaller and will become the new minimum cost for that node.
+
+		If we initialize these values to a small number, it could lead to unexpected results, such as the 
+		algorithm thinking that the first path it finds is the shortest one, even if a shorter path exists. 
+		Initializing them to a very large number ensures that any valid path found will have a lower cost 
+		and will be selected as the new shortest path.*/
+		int fCostA = Integer.MAX_VALUE;
+		int fCostB = Integer.MAX_VALUE;
+		int fCostC = Integer.MAX_VALUE;
 		
 		switch(direction) {
 		case 'U':
@@ -565,6 +583,8 @@ public class AStarAIPanel extends JPanel implements ActionListener  {
 			} else if(fCostC < fCostB && fCostC < fCostA) {
 				direction = 'R';
 			}
+
+			// Reinitializing fCost to a large number after switching the direction
 			fCostA = 999999999;
 			fCostB = 999999999;
 			fCostC = 999999999;
@@ -650,6 +670,7 @@ public class AStarAIPanel extends JPanel implements ActionListener  {
 			} else if (fCostC < fCostB && fCostC < fCostA) {
 				direction = 'R';
 			}
+			// Reinitializing fCost to a large number after switching the direction
 			fCostA = 999999999;
 			fCostB = 999999999;
 			fCostC = 999999999;
@@ -735,7 +756,7 @@ public class AStarAIPanel extends JPanel implements ActionListener  {
 			} else if (fCostC < fCostB && fCostC < fCostA) {
 				direction = 'U';
 			}
-
+			// Reinitializing fCost to a large number after switching the direction
 			fCostA = 999999999;
 			fCostB = 999999999;
 			fCostC = 999999999;
@@ -820,7 +841,7 @@ public class AStarAIPanel extends JPanel implements ActionListener  {
 			} else if (fCostC < fCostB && fCostC < fCostA) {
 				direction = 'U';
 			}
-
+			// Reinitializing fCost to a large number after switching the direction
 			fCostA = 999999999;
 			fCostB = 999999999;
 			fCostC = 999999999;
