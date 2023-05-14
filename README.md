@@ -20,7 +20,7 @@ A* là thuật toán tìm kiếm trong đồ thị, thuật toán sẽ tìm mộ
 ## Phương án triển khai công việc:
   + Trước tiên dựng game bằng ngôn ngữ java, 
   + Tiếp theo sẽ tạo con rắn và tạo mỗi ngẫu nhiên. 
-  +(2 phần trên đã được học và hướng dẫn làm trong môn học 'lập trình hướng đối tượng')
+  + (2 phần trên đã được học và hướng dẫn làm trong môn học 'lập trình hướng đối tượng')
   + Cuối cùng kết hợp thuật toán A* để cho con rắn tự động di chuyển.
   
 
