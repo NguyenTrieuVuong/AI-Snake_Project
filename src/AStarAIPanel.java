@@ -182,21 +182,22 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 			}
 		}
 		if(x[0] < 0) {
-			running = false;
+			x[0] = SCREEN_WIDTH - UNIT_SIZE;
 		}
 		if(x[0] >= SCREEN_WIDTH) {
-			running = false;
+			x[0] = 0;
 		}
 		if (y[0] < 0) {
-			running = false;
+			y[0] = SCREEN_HEIGHT - UNIT_SIZE;
 		}
 		if (y[0] >= SCREEN_HEIGHT) {
-			running = false;
+			y[0] = 0;
 		}
 		if (!running) {
 			timer.stop();
 		}
 	}
+	
 	
 	public void gameOver(Graphics g) {
 		((MyFrame) frame).gameOverAStarAI(new GOAStarPanel(applesEaten, SCREEN_WIDTH, SCREEN_HEIGHT, g, frame));
@@ -265,9 +266,15 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 					diagonally is typically set to sqrt(2) (approximately 1.4) as it involves moving to 
 					the neighboring cell in a diagonal direction.*/
 					hCostA+= (xDistance * 10) + (yDistance * 10);
+					// Wrap to bottom
+					if (y[0] - UNIT_SIZE < 0) {
+						y[0] = SCREEN_HEIGHT - UNIT_SIZE;
+					}
 					fCostA = hCostA + 10;
 				}
 				blocked = false;
+			}else if (y[0] - UNIT_SIZE < 0) {
+				y[0] = SCREEN_HEIGHT - UNIT_SIZE;
 			}
 			
 			// If space to go left
@@ -294,6 +301,10 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 					diagonally is typically set to sqrt(2) (approximately 1.4) as it involves moving to 
 					the neighboring cell in a diagonal direction.*/
 					hCostB+= (xDistance * 10) + (yDistance * 10);
+					// Wrap to right
+					if (x[0] - UNIT_SIZE < 0) {
+						x[0] = SCREEN_WIDTH - UNIT_SIZE;
+					}
 					fCostB = hCostB + 14;
 				}
 				blocked = false;
@@ -316,6 +327,10 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 						hCostC = 4;
 					}
 					hCostC+= (xDistance * 10) + (yDistance * 10);
+					// Wrap to left
+					if (x[0] - UNIT_SIZE >= SCREEN_WIDTH) {
+						x[0] = 0;
+					}
 					fCostC = hCostC + 14;
 				}
 				blocked = false;
@@ -358,9 +373,15 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 						hCostA = 4;
 					}
 					hCostA += (xDistance * 10) + (yDistance * 10);
+					// Wrap to top
+					if (y[0] + UNIT_SIZE >= SCREEN_HEIGHT) {
+						y[0] = 0;
+					}
 					fCostA = hCostA + 10;
 				}
 				blocked = false;
+			}else if (y[0] + UNIT_SIZE >= SCREEN_HEIGHT) {
+				y[0] = 0;
 			}
 			
 			// If space to go left
@@ -380,6 +401,10 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 						hCostB = 4;
 					}
 					hCostB += (xDistance * 10) + (yDistance * 10);
+					// Wrap to right
+					if (x[0] - UNIT_SIZE < 0) {
+						x[0] = SCREEN_WIDTH - UNIT_SIZE;
+					}
 					fCostB = hCostB + 14;
 				}
 				blocked = false;
@@ -402,6 +427,10 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 						hCostC = 4;
 					}
 					hCostC += (xDistance * 10) + (yDistance * 10);
+					// Wrap to left
+					if (x[0] + UNIT_SIZE >= SCREEN_WIDTH) {
+						x[0] = 0;
+					}
 					fCostC = hCostC + 14;
 				}
 				blocked = false;
@@ -444,9 +473,15 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 						hCostA = 4;
 					}
 					hCostA += (xDistance * 10) + (yDistance * 10);
+					// Wrap to right
+					if (x[0] - UNIT_SIZE < 0) {
+						x[0] = SCREEN_WIDTH - UNIT_SIZE;
+					}
 					fCostA = hCostA + 10;
 				}
 				blocked = false;
+			}else if (x[0] - UNIT_SIZE < 0) {
+				x[0] = SCREEN_WIDTH - UNIT_SIZE;
 			}
 			
 			// If space to go down
@@ -466,6 +501,10 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 						hCostB = 4;
 					}
 					hCostB += (xDistance * 10) + (yDistance * 10);
+					// Wrap to top
+					if (y[0] + UNIT_SIZE >= SCREEN_HEIGHT) {
+						y[0] = 0;
+					}
 					fCostB = hCostB + 14;
 				}
 				blocked = false;
@@ -488,6 +527,10 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 						hCostC = 4;
 					}
 					hCostC += (xDistance * 10) + (yDistance * 10);
+					// Wrap to bottom
+					if (y[0] - UNIT_SIZE < 0) {
+						y[0] = SCREEN_HEIGHT - UNIT_SIZE;
+					}
 					fCostC = hCostC + 14;
 				}
 				blocked = false;
@@ -529,9 +572,15 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 						hCostA = 4;
 					}
 					hCostA += (xDistance * 10) + (yDistance * 10);
+					// Wrap to left
+					if (x[0] + UNIT_SIZE >= SCREEN_WIDTH) {
+						x[0] = 0;
+					}
 					fCostA = hCostA + 10;
 				}
 				blocked = false;
+			}else if (x[0] + UNIT_SIZE >= SCREEN_WIDTH) {
+				x[0] = 0;
 			}
 			
 			// If space to go down
@@ -551,6 +600,10 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 						hCostB = 4;
 					}
 					hCostB += (xDistance * 10) + (yDistance * 10);
+					// Wrap to top
+					if (y[0] + UNIT_SIZE >= SCREEN_HEIGHT) {
+						y[0] = 0;
+					}
 					fCostB = hCostB + 14;
 				}
 				blocked = false;
@@ -573,6 +626,10 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 						hCostC = 4;
 					}
 					hCostC += (xDistance * 10) + (yDistance * 10);
+					// Wrap to bottom
+					if (y[0] - UNIT_SIZE < 0) {
+						y[0] = SCREEN_HEIGHT - UNIT_SIZE;
+					}
 					fCostC = hCostC + 14;
 				}
 				blocked = false;

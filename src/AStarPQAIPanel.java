@@ -209,16 +209,16 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 			}
 		}
 		if(x[0] < 0) {
-			running = false;
+			x[0] = SCREEN_WIDTH - UNIT_SIZE;
 		}
 		if(x[0] >= SCREEN_WIDTH) {
-			running = false;
+			x[0] = 0;
 		}
 		if (y[0] < 0) {
-			running = false;
+			y[0] = SCREEN_HEIGHT - UNIT_SIZE;
 		}
 		if (y[0] >= SCREEN_HEIGHT) {
-			running = false;
+			y[0] = 0;
 		}
 		if (!running) {
 			timer.stop();
@@ -489,6 +489,8 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 		int hCostA = 0;
 		int hCostB = 0;
 		int hCostC = 0;
+		int xDistance;
+		int yDistance;
 		boolean blocked = false;
 		/*Initializing the fCostA, fCostB, and fCostC variables to a very large number is a common practice 
 		in pathfinding algorithms, particularly in A* algorithm implementations. This is done because fCostA, 
@@ -523,13 +525,28 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 					// Going up
 					xDistance = Math.abs((appleX - x[0]) / UNIT_SIZE);
 					yDistance = Math.abs((appleY - (y[0] - UNIT_SIZE)) / UNIT_SIZE);
+					/* If the yDistance (the absolute value of the difference in y-coordinates between the current node and the 
+					goal node) is not equal to zero, the algorithm assigns a heuristic cost of 4 to the movement.  */
 					if (yDistance != 0) {
 						hCostA = 4;
 					}
+					/*The movement cost of 10 for vertical/horizontal movement and 14 for diagonal movement 
+					is based on the fact that this algorithm is using the A* search algorithm to find 
+					the shortest path to the apple for the snake in a grid-like environment. 
+					In a grid, the cost of moving in the vertical or horizontal direction is typically set to 1, 
+					as it involves moving to the neighboring cell in the same row or column. The cost of moving 
+					diagonally is typically set to sqrt(2) (approximately 1.4) as it involves moving to 
+					the neighboring cell in a diagonal direction.*/
 					hCostA+= (xDistance * 10) + (yDistance * 10);
+					// Wrap to bottom
+					if (y[0] - UNIT_SIZE < 0) {
+						y[0] = SCREEN_HEIGHT - UNIT_SIZE;
+					}
 					fCostA = hCostA + 10;
 				}
 				blocked = false;
+			}else if (y[0] - UNIT_SIZE < 0) {
+				y[0] = SCREEN_HEIGHT - UNIT_SIZE;
 			}
 			
 			// If space to go left
@@ -548,7 +565,18 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 					if (yDistance != 0) {
 						hCostB = 4;
 					}
+					/*The movement cost of 10 for vertical/horizontal movement and 14 for diagonal movement 
+					is based on the fact that this algorithm is using the A* search algorithm to find 
+					the shortest path to the apple for the snake in a grid-like environment. 
+					In a grid, the cost of moving in the vertical or horizontal direction is typically set to 1, 
+					as it involves moving to the neighboring cell in the same row or column. The cost of moving 
+					diagonally is typically set to sqrt(2) (approximately 1.4) as it involves moving to 
+					the neighboring cell in a diagonal direction.*/
 					hCostB+= (xDistance * 10) + (yDistance * 10);
+					// Wrap to right
+					if (x[0] - UNIT_SIZE < 0) {
+						x[0] = SCREEN_WIDTH - UNIT_SIZE;
+					}
 					fCostB = hCostB + 14;
 				}
 				blocked = false;
@@ -571,6 +599,10 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 						hCostC = 4;
 					}
 					hCostC+= (xDistance * 10) + (yDistance * 10);
+					// Wrap to left
+					if (x[0] - UNIT_SIZE >= SCREEN_WIDTH) {
+						x[0] = 0;
+					}
 					fCostC = hCostC + 14;
 				}
 				blocked = false;
@@ -583,7 +615,6 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 			} else if(fCostC < fCostB && fCostC < fCostA) {
 				direction = 'R';
 			}
-
 			// Reinitializing fCost to a large number after switching the direction
 			fCostA = 999999999;
 			fCostB = 999999999;
@@ -614,9 +645,15 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 						hCostA = 4;
 					}
 					hCostA += (xDistance * 10) + (yDistance * 10);
+					// Wrap to top
+					if (y[0] + UNIT_SIZE >= SCREEN_HEIGHT) {
+						y[0] = 0;
+					}
 					fCostA = hCostA + 10;
 				}
 				blocked = false;
+			}else if (y[0] + UNIT_SIZE >= SCREEN_HEIGHT) {
+				y[0] = 0;
 			}
 			
 			// If space to go left
@@ -636,6 +673,10 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 						hCostB = 4;
 					}
 					hCostB += (xDistance * 10) + (yDistance * 10);
+					// Wrap to right
+					if (x[0] - UNIT_SIZE < 0) {
+						x[0] = SCREEN_WIDTH - UNIT_SIZE;
+					}
 					fCostB = hCostB + 14;
 				}
 				blocked = false;
@@ -658,6 +699,10 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 						hCostC = 4;
 					}
 					hCostC += (xDistance * 10) + (yDistance * 10);
+					// Wrap to left
+					if (x[0] + UNIT_SIZE >= SCREEN_WIDTH) {
+						x[0] = 0;
+					}
 					fCostC = hCostC + 14;
 				}
 				blocked = false;
@@ -700,9 +745,15 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 						hCostA = 4;
 					}
 					hCostA += (xDistance * 10) + (yDistance * 10);
+					// Wrap to right
+					if (x[0] - UNIT_SIZE < 0) {
+						x[0] = SCREEN_WIDTH - UNIT_SIZE;
+					}
 					fCostA = hCostA + 10;
 				}
 				blocked = false;
+			}else if (x[0] - UNIT_SIZE < 0) {
+				x[0] = SCREEN_WIDTH - UNIT_SIZE;
 			}
 			
 			// If space to go down
@@ -722,6 +773,10 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 						hCostB = 4;
 					}
 					hCostB += (xDistance * 10) + (yDistance * 10);
+					// Wrap to top
+					if (y[0] + UNIT_SIZE >= SCREEN_HEIGHT) {
+						y[0] = 0;
+					}
 					fCostB = hCostB + 14;
 				}
 				blocked = false;
@@ -744,6 +799,10 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 						hCostC = 4;
 					}
 					hCostC += (xDistance * 10) + (yDistance * 10);
+					// Wrap to bottom
+					if (y[0] - UNIT_SIZE < 0) {
+						y[0] = SCREEN_HEIGHT - UNIT_SIZE;
+					}
 					fCostC = hCostC + 14;
 				}
 				blocked = false;
@@ -785,9 +844,15 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 						hCostA = 4;
 					}
 					hCostA += (xDistance * 10) + (yDistance * 10);
+					// Wrap to left
+					if (x[0] + UNIT_SIZE >= SCREEN_WIDTH) {
+						x[0] = 0;
+					}
 					fCostA = hCostA + 10;
 				}
 				blocked = false;
+			}else if (x[0] + UNIT_SIZE >= SCREEN_WIDTH) {
+				x[0] = 0;
 			}
 			
 			// If space to go down
@@ -807,6 +872,10 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 						hCostB = 4;
 					}
 					hCostB += (xDistance * 10) + (yDistance * 10);
+					// Wrap to top
+					if (y[0] + UNIT_SIZE >= SCREEN_HEIGHT) {
+						y[0] = 0;
+					}
 					fCostB = hCostB + 14;
 				}
 				blocked = false;
@@ -829,6 +898,10 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 						hCostC = 4;
 					}
 					hCostC += (xDistance * 10) + (yDistance * 10);
+					// Wrap to bottom
+					if (y[0] - UNIT_SIZE < 0) {
+						y[0] = SCREEN_HEIGHT - UNIT_SIZE;
+					}
 					fCostC = hCostC + 14;
 				}
 				blocked = false;
