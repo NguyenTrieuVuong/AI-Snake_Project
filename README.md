@@ -49,3 +49,4 @@ A* là thuật toán tìm kiếm trong đồ thị, thuật toán sẽ tìm mộ
 ## Tài liệu tham khảo:
   + Project đã làm trong môn 'Lập trình hướng đối tượng': https://github.com/NguyenTrieuVuong/SnakeGame
   + https://github.com/Yellowatch/Java-Snake-Game
+  + https://github.com/GreenSlime96/PathFinding
