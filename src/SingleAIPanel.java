@@ -7,13 +7,11 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Random;
+
 import javax.swing.*;
 
-public class AStarPQAIPanel extends JPanel implements ActionListener  {
+public class SingleAIPanel extends JPanel implements ActionListener {
 
 	final int SCREEN_WIDTH;
 	final int SCREEN_HEIGHT;
@@ -31,16 +29,9 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 	Timer timer;
 	Random random;
 	JFrame frame;
-	int xDistance;
-	int yDistance;
-	int hCost;
-	int numDirections = 0;
-	char directions[];
-	int count = 0;
-	int gCost;
 	
 	// Constructor
-	public AStarPQAIPanel(JFrame frame, int w, int h) {
+	public SingleAIPanel(JFrame frame, int w, int h) {
 		SCREEN_WIDTH = w;
 		SCREEN_HEIGHT = h;
 		GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/UNIT_SIZE;
@@ -104,24 +95,19 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 			gameOver(g);
 		}
 	}
-		
+	
 	// Randomize new apple in the frame
 	public void newApple() {
-		appleX = random.nextInt((int)(SCREEN_WIDTH/UNIT_SIZE)) * UNIT_SIZE;	
-		appleY = random.nextInt((int)(SCREEN_HEIGHT/UNIT_SIZE)) * UNIT_SIZE;	
+			appleX = random.nextInt((int) (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE ;
+			appleY = random.nextInt((int) (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE ;
+	
 		fixApple();
-
-		List<Node> path = aStar();
-		if (path == null) {
-			numDirections = -1;
-			return;
-		}
-		numDirections = path.size();
-		directions = new char[numDirections];
-		for (int i = 0; i < numDirections; i++) {
-			directions[i] = path.get(i).getDirection();
-		}
 	}
+	
+	private boolean isOnEdge(int x, int y) {
+		return x == 0 || x == SCREEN_WIDTH - UNIT_SIZE || y == 0 || y == SCREEN_HEIGHT - UNIT_SIZE;
+	}
+	
 	
 	private void fixApple() {
 		for(int i = bodyParts; i>0; i--) {
@@ -133,11 +119,6 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 	
 	// Snake moving left/right/up/down
 	public void move() {
-		if (numDirections != -1) {
-			direction = directions[numDirections - 1];
-			numDirections--;
-		}
-		
 		for(int i = bodyParts; i > 0; i--) {
 			x[i] = x[i-1];
 			y[i] = y[i-1];
@@ -195,15 +176,13 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 	
 	// Display game over panel when game is over
 	public void gameOver(Graphics g) {
-		((MyFrame) frame).gameOverAStarPQ(new GOAStarPQPanel(applesEaten, SCREEN_WIDTH, SCREEN_HEIGHT, g, frame));
+		((MyFrame) frame).gameOverSingleAI(new GOSingleAIPanel(applesEaten, SCREEN_WIDTH, SCREEN_HEIGHT, g, frame));
 	}
-
+	
 	// Perform action of snake
 	public void actionPerformed(ActionEvent event) {
 		if(running) {
-			if (numDirections == -1) {
-				pathFinder();
-			}
+			pathFinder();
 			move();
 			checkApple();
 			checkCollisions();
@@ -211,293 +190,41 @@ public class AStarPQAIPanel extends JPanel implements ActionListener  {
 		repaint();
 	}
 	
-	// Check if the snake is blocked by the body of the snake or by the wall
-	private boolean isBlocked(char d, int x, int y) { 
-		if (d == 'R' ) {
-			if (x >= SCREEN_WIDTH) {
-				return true;
-			}
-			for (int i = bodyParts; i > 0; i--) {
-				if ((x == this.x[i]) && (y == this.y[i])) {
-					return true;
-				}
-			}
-		} else if (d == 'L') {
-			if (x < 0) {
-				return true;
-			}
-			for (int i = bodyParts; i > 0; i--) {
-				if ((x == this.x[i]) && (y == this.y[i])) {
-					return true;
-				}
-			}
-		} else if (d == 'D') {
-			if (y >= SCREEN_WIDTH) {
-				return true;
-			}
-			for (int i = bodyParts; i > 0; i--) {
-				if ((x == this.x[i]) && (y == this.y[i])) {
-					return true;
-				}
-			}
-		} else {
-			if (y < 0) {
-				return true;
-			}
-			for (int i = bodyParts; i > 0; i--) {
-				if ((x == this.x[i]) && (y == this.y[i])) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	/*
- The code below implements the A* algorithm to find the shortest path from the current position to the target 
- on a 2D grid. The nodes in the grid are represented by Node objects, each containing information about the 
- node's coordinates, the cost values (gCost) and heuristic function (hCost) required for calculating its total 
- cost (fCost).
-
-The A* algorithm is implemented using a priority queue to store the nodes that need to be considered. When 
-starting, the current node is created from the initial position and added to the queue. During the search, 
-the algorithm looks for neighboring nodes of the current node to add to the priority queue. The neighboring 
-nodes are added to the priority queue based on their total cost (fCost). When the target node is found, the 
-algorithm returns a list of the parent nodes of the target node to determine the path.
-
-Some variables used in the code are:
-- parents: A list of the parent nodes of the target node (returned when the path is found).
-- open: A priority queue containing the nodes that need to be considered.
-- closed: A list of nodes that have been considered.
-- count: The number of times nodes are traversed during the search.
-- gCost: The cost of moving from the current node to the next node (values updated based on the direction of movement).
-- startNode: The initial node created from the initial position and added to the priority queue.
-- goalNode: The target node created from the coordinates of the target and used to check if the path has been found.
-- SCREEN_WIDTH and SCREEN_HEIGHT: The screen size.
-- UNIT_SIZE: The size of each cell in the grid.
-- x[] and y[]: Arrays containing the coordinates of cells in the grid.
-- isBlocked(): A method to check if a cell is blocked or not.
-- findHCost(): A heuristic function to calculate the heuristic cost function for each node.
- */
-	private List<Node> aStar() {
-
-		List<Node> parents = new ArrayList<Node>();
-		PriorityQueue<Node> open = new PriorityQueue<Node>();
-		List<Node> closed = new ArrayList<Node>();
-		
-		count = 0;
-		gCost = 0;
-		Node startNode = new Node(x[0], y[0], gCost, findHCost(x[0], y[0]));
-		startNode.setDirection(direction);
-		Node goalNode = new Node(appleX, appleY, findHCost(x[0], y[0]), 0);
-
-		open.add(startNode);
-		
-		while (!open.isEmpty()) { 
-			
-			count++;
-			
-			Node current = open.poll();
-			current.close();
-			closed.add(current);
-			
-			if (count > (SCREEN_WIDTH / UNIT_SIZE) * (SCREEN_HEIGHT / UNIT_SIZE) * 10) {
-				return null;
-			}
-			
-			if (current.same(goalNode)) {
-				//backtrack and create parents list
-				boolean finished = false;
-				Node n = current;
-				while (!finished) {
-					parents.add(n);
-					n = n.getParent();
-					if (n.getParent() == null) {
-						finished = true;
-					}
-				}
-				return parents;
-			}
-			
-			// check neighbours
-			for (int i = 0; i < 3; i++) {
-				/*The movement cost of 10 for vertical/horizontal movement and 14 for diagonal movement 
-				is based on the fact that this algorithm is using the A* search algorithm to find 
-				the shortest path to the apple for the snake in a grid-like environment. 
-				In a grid, the cost of moving in the vertical or horizontal direction is typically set to 1, 
-				as it involves moving to the neighboring cell in the same row or column. The cost of moving 
-				diagonally is typically set to sqrt(2) (approximately 1.4) as it involves moving to 
-				the neighboring cell in a diagonal direction.*/
-				if (i == 0) {
-					gCost = 10; // if current direction
-				} else {
-					gCost = 14; // if change direction, costs more
-				}
-
-				boolean exists = false;
-				Node n;
-				if (i == 0) {
-					if (current.getDirection() == 'R') { // Continue Right
-						// CHECK IF BLOCKED
-						if (!isBlocked(current.getDirection(), current.getxAxis() + UNIT_SIZE, current.getyAxis())) {
-							n = new Node(current.getxAxis() + UNIT_SIZE, current.getyAxis(), gCost, findHCost(current.getxAxis(), current.getyAxis()));
-							if (open.contains(n) || closed.contains(n)) {
-								exists = true;
-							}
-						} else {
-							continue;
-						}
-					} else if (current.getDirection() == 'L') { // Continue Left
-						if (!isBlocked(current.getDirection(), current.getxAxis() - UNIT_SIZE, current.getyAxis())) {
-							n = new Node(current.getxAxis() - UNIT_SIZE, current.getyAxis(), gCost, findHCost(current.getxAxis(), current.getyAxis()));
-							if (open.contains(n) || closed.contains(n)) {
-								exists = true;
-							}
-						} else {
-							continue;
-						}
-					} else if (current.getDirection() == 'D') { // Continue Down
-						if (!isBlocked(current.getDirection(), current.getxAxis(), current.getyAxis() + UNIT_SIZE)) {
-							n = new Node(current.getxAxis(), current.getyAxis() + UNIT_SIZE, gCost, findHCost(current.getxAxis(), current.getyAxis()));
-							if (open.contains(n) || closed.contains(n)) {
-								exists = true;
-							}
-						} else {
-							continue;
-						}
-					} else { // Continue Up
-						if(!isBlocked(current.getDirection(), current.getxAxis(), current.getyAxis() - UNIT_SIZE)) {
-							n = new Node(current.getxAxis(), current.getyAxis() - UNIT_SIZE, gCost, findHCost(current.getxAxis(), current.getyAxis()));
-							if (open.contains(n) || closed.contains(n)) {
-								exists = true;
-							}
-						} else {
-							continue;
-						}
-					}
-				} else if (i == 1) {
-					if (current.getDirection() == 'R') { // Turn Down
-						if(!isBlocked('D', current.getxAxis(), current.getyAxis() + UNIT_SIZE)) {
-							n = new Node(current.getxAxis(), current.getyAxis() + UNIT_SIZE, gCost, findHCost(current.getxAxis(), current.getyAxis()));
-							if (open.contains(n) || closed.contains(n)) {
-								exists = true;
-							}
-						} else {
-							continue;
-						}
-					} else if (current.getDirection() == 'L') { // Turn Up
-						if(!isBlocked('U', current.getxAxis(), current.getyAxis() - UNIT_SIZE)) {
-							n = new Node(current.getxAxis(), current.getyAxis() - UNIT_SIZE, gCost, findHCost(current.getxAxis(), current.getyAxis()));
-							if (open.contains(n) || closed.contains(n)) {
-								exists = true;
-							}
-						} else {
-							continue;
-						}
-					} else if (current.getDirection() == 'D') { // Turn Left
-						if(!isBlocked('L', current.getxAxis() - UNIT_SIZE, current.getyAxis())) {
-							n = new Node(current.getxAxis() - UNIT_SIZE, current.getyAxis(), gCost, findHCost(current.getxAxis(), current.getyAxis()));
-							if (open.contains(n) || closed.contains(n)) {
-								exists = true;
-							}
-						} else {
-							continue;
-						}
-					} else { // Turn Right
-						if(!isBlocked('R', current.getxAxis() + UNIT_SIZE, current.getyAxis())) {
-							n = new Node(current.getxAxis() + UNIT_SIZE, current.getyAxis(), gCost, findHCost(current.getxAxis(), current.getyAxis()));
-							if (open.contains(n) || closed.contains(n)) {
-								exists = true;
-							}
-						} else {
-							continue;
-						}
-					}
-				} else {
-					if (current.getDirection() == 'R') { // Turn Up
-						if(!isBlocked('U', current.getxAxis(), current.getyAxis() - UNIT_SIZE)) {
-							n = new Node(current.getxAxis(), current.getyAxis() - UNIT_SIZE, gCost, findHCost(current.getxAxis(), current.getyAxis()));
-							if (open.contains(n) || closed.contains(n)) {
-								exists = true;
-							}
-						} else {
-							continue;
-						}
-					} else if (current.getDirection() == 'L') { // Turn Down
-						if(!isBlocked('D', current.getxAxis(), current.getyAxis() + UNIT_SIZE)) {
-							n = new Node(current.getxAxis(), current.getyAxis() + UNIT_SIZE, gCost, findHCost(current.getxAxis(), current.getyAxis()));
-							if (open.contains(n) || closed.contains(n)) {
-								exists = true;
-							}
-						} else {
-							continue;
-						}
-					} else if (current.getDirection() == 'D') { // Turn Right
-						if(!isBlocked('R', current.getxAxis() + UNIT_SIZE, current.getyAxis())) {
-							n = new Node(current.getxAxis() + UNIT_SIZE, current.getyAxis(), gCost, findHCost(current.getxAxis(), current.getyAxis()));
-							if (open.contains(n) || closed.contains(n)) {
-								exists = true;
-							}
-						} else {
-							continue;
-						}
-					} else { // Turn Left
-						if(!isBlocked('L', current.getxAxis() - UNIT_SIZE, current.getyAxis())) {
-							n = new Node(current.getxAxis() - UNIT_SIZE, current.getyAxis(), gCost, findHCost(current.getxAxis(), current.getyAxis()));
-							if (open.contains(n) || closed.contains(n)) {
-								exists = true;
-							}
-						} else {
-							continue;
-						}
-					}
-				}
-				
-				if (exists && n.isClosed()) {
-					continue;
-				}
-				
-				if (n.getFCost() <= current.getFCost() || !open.contains(n)) {
-					n.setParent(current);
-					if (!open.contains(n)) {
-						n.setgCost(n.getParent().getgCost() + gCost);
-						open.add(n);
-					}
-				}
-			}
-		}
-		return null;
-	}
-
-/*
-The `findHCost(int xAxis, int yAxis)` method calculates the "heuristic" cost (h-cost) of reaching the apple 
-at a particular `xAxis` and `yAxis` position. This cost is calculated as the Manhattan distance between the 
-current position and the apple position, which is the sum of the absolute differences in the x-axis and y-axis 
-between the two positions. The method also takes into account whether the character must move vertically to 
-reach the apple, in which case it adds 4 to the cost.
- */
-	
-	private int findHCost(int xAxis, int yAxis) {
-		hCost = 0;
-		xDistance = Math.abs((appleX - xAxis) / UNIT_SIZE);
-		yDistance = Math.abs((appleY - yAxis) / UNIT_SIZE);
-		/* If the yDistance (the absolute value of the difference in y-coordinates between the current node and the 
-		goal node) is not equal to zero, the algorithm assigns a heuristic cost of 4 to the movement.  */ 
-		if (yDistance != 0) {
-			hCost = 4;
-		}
-		hCost += (xDistance * 10) + (yDistance * 10);
-		return hCost;
-	}
-	
 	// Snake AI find path
-	/*
- The `pathFinder()` method determines the best direction for the character to move to reach the apple. It 
-first calculates the h-cost for three possible moves: up, left, and right. For each possible move, it checks 
-whether the character's path would be blocked by its own body or the edges of the screen. If the path is not 
-blocked, it calculates the f-cost for that move. The f-cost is the sum of the g-cost (distance from current 
-position to new position) and the h-cost (calculated by calling `findHCost()`). It then chooses the move with 
-the lowest f-cost, updates the character's direction, and resets the f-cost variables. 
+/*
+ This code appears to be a part of a snake game. It is a method called "pathFinder" that is responsible for 
+ determining the direction in which the snake should move in order to reach the apple.
+
+The code initializes several variables to be used in the algorithm. The variables include hCostA, hCostB, 
+hCostC, xDistance, yDistance, blocked, fCostA, fCostB, and fCostC. The variables hCostA, hCostB, and hCostC 
+represent the estimated cost from the current position to the goal position when moving in three different 
+directions (up, left, and right). The variables xDistance and yDistance represent the distance between the 
+current position and the goal position in the x and y directions. The variable blocked is used to check if 
+the snake's body is blocking the path. The variables fCostA, fCostB, and fCostC represent the total cost 
+from the start position to the goal position when moving in three different directions. 
+
+The code then checks the direction in which the snake is moving. If the direction is up, the code checks 
+if the snake can move up, left, or right. It first checks if the snake can move up. If it can move up, it 
+checks if there are any body parts blocking the way. If there are no body parts blocking the way, it calculates 
+the estimated cost of moving up to the goal position. The estimated cost is calculated by adding the distance 
+between the current position and the goal position in the x and y directions, multiplied by 10, to the heuristic 
+cost hCostA. The heuristic cost hCostA is set to 4 if the distance in the y direction is not zero. The total 
+cost fCostA is then calculated by adding the heuristic cost hCostA and the cost of moving up, which is 10.
+
+The code then checks if the snake can move left or right, and if it can, it calculates the estimated cost 
+of moving in that direction and the total cost of moving in that direction. Finally, the code checks which 
+direction has the lowest total cost and sets the direction of the snake accordingly.
+
+If the snake is moving down, the code follows a similar procedure as for moving up. The code checks if the 
+snake can move down, left, or right. If it can move down, it calculates the estimated cost of moving down 
+to the goal position. The heuristic cost hCostA is set to 4 if the distance in the y direction is not zero. 
+The total cost fCostA is then calculated by adding the heuristic cost hCostA and the cost of moving down, 
+which is 10. The code then checks if the snake can move left or right, and if it can, it calculates the 
+estimated cost of moving in that direction and the total cost of moving in that direction. Finally, the code 
+checks which direction has the lowest total cost and sets the direction of the snake accordingly.
+
+The code updates the fCostA, fCostB, and fCostC variables to their initial values at the end of the pathFinder 
+method, ready for the next iteration.
  */
 	private void pathFinder() {
 		int hCostA = 0;
@@ -630,9 +357,9 @@ the lowest f-cost, updates the character's direction, and resets the f-cost vari
 				direction = 'R';
 			}
 			// Reinitializing fCost to a large number after switching the direction
-			fCostA = 999999999;
-			fCostB = 999999999;
-			fCostC = 999999999;
+			fCostA = Integer.MAX_VALUE;
+			fCostB = Integer.MAX_VALUE;
+			fCostC = Integer.MAX_VALUE;
 			
 			break;
 		
@@ -730,9 +457,9 @@ the lowest f-cost, updates the character's direction, and resets the f-cost vari
 				direction = 'R';
 			}
 			// Reinitializing fCost to a large number after switching the direction
-			fCostA = 999999999;
-			fCostB = 999999999;
-			fCostC = 999999999;
+			fCostA = Integer.MAX_VALUE;
+			fCostB = Integer.MAX_VALUE;
+			fCostC = Integer.MAX_VALUE;
 			
 			break;
 		
@@ -830,9 +557,9 @@ the lowest f-cost, updates the character's direction, and resets the f-cost vari
 				direction = 'U';
 			}
 			// Reinitializing fCost to a large number after switching the direction
-			fCostA = 999999999;
-			fCostB = 999999999;
-			fCostC = 999999999;
+			fCostA = Integer.MAX_VALUE;
+			fCostB = Integer.MAX_VALUE;
+			fCostC = Integer.MAX_VALUE;
 			
 			break;
 		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -929,9 +656,9 @@ the lowest f-cost, updates the character's direction, and resets the f-cost vari
 				direction = 'U';
 			}
 			// Reinitializing fCost to a large number after switching the direction
-			fCostA = 999999999;
-			fCostB = 999999999;
-			fCostC = 999999999;
+			fCostA = Integer.MAX_VALUE;
+			fCostB = Integer.MAX_VALUE;
+			fCostC = Integer.MAX_VALUE;
 			
 			break;
 		}

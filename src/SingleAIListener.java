@@ -8,16 +8,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
-public class AStarAIListener implements ActionListener {
+public class SingleAIListener implements ActionListener {
 	JFrame frame;
 
-	public AStarAIListener(JFrame frame) {
+	public SingleAIListener(JFrame frame) {
 		this.frame = frame;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		((MyFrame) frame).AStarAI();
+		((MyFrame) frame).SingleAI();
 	}
 
 }
