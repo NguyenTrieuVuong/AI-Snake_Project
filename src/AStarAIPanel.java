@@ -1,42 +1,5 @@
 // package Game;
 
-/*
- This code appears to be a part of a snake game. It is a method called "pathFinder" that is responsible for 
- determining the direction in which the snake should move in order to reach the apple. The algorithm used 
- for determining the path is A* algorithm. The A* algorithm uses a heuristic function to estimate the cost 
- from the current position to the goal position, and then chooses the lowest cost path to reach the goal position.
-
-The code initializes several variables to be used in the algorithm. The variables include hCostA, hCostB, 
-hCostC, xDistance, yDistance, blocked, fCostA, fCostB, and fCostC. The variables hCostA, hCostB, and hCostC 
-represent the estimated cost from the current position to the goal position when moving in three different 
-directions (up, left, and right). The variables xDistance and yDistance represent the distance between the 
-current position and the goal position in the x and y directions. The variable blocked is used to check if 
-the snake's body is blocking the path. The variables fCostA, fCostB, and fCostC represent the total cost 
-from the start position to the goal position when moving in three different directions. 
-
-The code then checks the direction in which the snake is moving. If the direction is up, the code checks 
-if the snake can move up, left, or right. It first checks if the snake can move up. If it can move up, it 
-checks if there are any body parts blocking the way. If there are no body parts blocking the way, it calculates 
-the estimated cost of moving up to the goal position. The estimated cost is calculated by adding the distance 
-between the current position and the goal position in the x and y directions, multiplied by 10, to the heuristic 
-cost hCostA. The heuristic cost hCostA is set to 4 if the distance in the y direction is not zero. The total 
-cost fCostA is then calculated by adding the heuristic cost hCostA and the cost of moving up, which is 10.
-
-The code then checks if the snake can move left or right, and if it can, it calculates the estimated cost 
-of moving in that direction and the total cost of moving in that direction. Finally, the code checks which 
-direction has the lowest total cost and sets the direction of the snake accordingly.
-
-If the snake is moving down, the code follows a similar procedure as for moving up. The code checks if the 
-snake can move down, left, or right. If it can move down, it calculates the estimated cost of moving down 
-to the goal position. The heuristic cost hCostA is set to 4 if the distance in the y direction is not zero. 
-The total cost fCostA is then calculated by adding the heuristic cost hCostA and the cost of moving down, 
-which is 10. The code then checks if the snake can move left or right, and if it can, it calculates the 
-estimated cost of moving in that direction and the total cost of moving in that direction. Finally, the code 
-checks which direction has the lowest total cost and sets the direction of the snake accordingly.
-
-The code updates the fCostA, fCostB, and fCostC variables to their initial values at the end of the pathFinder 
-method, ready for the next iteration.
- */
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -67,6 +30,7 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 	Random random;
 	JFrame frame;
 	
+	// Constructor
 	public AStarAIPanel(JFrame frame, int w, int h) {
 		SCREEN_WIDTH = w;
 		SCREEN_HEIGHT = h;
@@ -104,6 +68,7 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 		draw(g);
 	}
 	
+	// Draw GUI when the snake eats apple
 	public void draw(Graphics g) {
 		if (running) {
 			g.setColor(Color.RED);
@@ -130,12 +95,19 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 			gameOver(g);
 		}
 	}
-		
+	
+	// Randomize new apple in the frame
 	public void newApple() {
-		appleX = random.nextInt((int)(SCREEN_WIDTH/UNIT_SIZE)) * UNIT_SIZE;	
-		appleY = random.nextInt((int)(SCREEN_HEIGHT/UNIT_SIZE)) * UNIT_SIZE;	
+			appleX = random.nextInt((int) (SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE ;
+			appleY = random.nextInt((int) (SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE ;
+	
 		fixApple();
 	}
+	
+	private boolean isOnEdge(int x, int y) {
+		return x == 0 || x == SCREEN_WIDTH - UNIT_SIZE || y == 0 || y == SCREEN_HEIGHT - UNIT_SIZE;
+	}
+	
 	
 	private void fixApple() {
 		for(int i = bodyParts; i>0; i--) {
@@ -145,6 +117,7 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 		}
 	}
 	
+	// Snake moving left/right/up/down
 	public void move() {
 		for(int i = bodyParts; i > 0; i--) {
 			x[i] = x[i-1];
@@ -167,6 +140,7 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 		}
 	}
 	
+	// Check if the snake eats apple
 	public void checkApple() {
 		if((x[0] == appleX) && (y[0] == appleY)) {
 			bodyParts++;
@@ -175,34 +149,37 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 		}
 	}
 	
+	// Check if the snake goes through the wall and appears on the other side
 	public void checkCollisions() {
 		for(int i = bodyParts; i>0; i--) {
 			if((x[0] == x[i]) && (y[0] == y[i])) {
 				running = false;
 			}
 		}
-		if(x[0] < 0) {
-			x[0] = SCREEN_WIDTH - UNIT_SIZE;
-		}
-		if(x[0] >= SCREEN_WIDTH) {
-			x[0] = 0;
-		}
-		if (y[0] < 0) {
-			y[0] = SCREEN_HEIGHT - UNIT_SIZE;
-		}
-		if (y[0] >= SCREEN_HEIGHT) {
-			y[0] = 0;
-		}
+		for (int i = 0; i < bodyParts; i++) {
+            if (x[i] < 0) {
+                x[i] = SCREEN_WIDTH; //Warp to right
+            } else if (x[i] == SCREEN_WIDTH) {
+                x[i] = 0; //Warp to left
+            }
+            
+            if (y[i] < 0) {
+                y[i] = SCREEN_HEIGHT; //Warp to bottom
+            } else if (y[i] == SCREEN_HEIGHT) {
+                y[i] = 0; //Warp to top
+            }
+        }
 		if (!running) {
 			timer.stop();
 		}
 	}
 	
-	
+	// Display game over panel when game is over
 	public void gameOver(Graphics g) {
 		((MyFrame) frame).gameOverAStarAI(new GOAStarPanel(applesEaten, SCREEN_WIDTH, SCREEN_HEIGHT, g, frame));
 	}
 	
+	// Perform action of snake
 	public void actionPerformed(ActionEvent event) {
 		if(running) {
 			pathFinder();
@@ -213,6 +190,44 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 		repaint();
 	}
 	
+	// Snake AI find path
+/*
+ This code appears to be a part of a snake game. It is a method called "pathFinder" that is responsible for 
+ determining the direction in which the snake should move in order to reach the apple. The algorithm used 
+ for determining the path is A* algorithm. The A* algorithm uses a heuristic function to estimate the cost 
+ from the current position to the goal position, and then chooses the lowest cost path to reach the goal position.
+
+The code initializes several variables to be used in the algorithm. The variables include hCostA, hCostB, 
+hCostC, xDistance, yDistance, blocked, fCostA, fCostB, and fCostC. The variables hCostA, hCostB, and hCostC 
+represent the estimated cost from the current position to the goal position when moving in three different 
+directions (up, left, and right). The variables xDistance and yDistance represent the distance between the 
+current position and the goal position in the x and y directions. The variable blocked is used to check if 
+the snake's body is blocking the path. The variables fCostA, fCostB, and fCostC represent the total cost 
+from the start position to the goal position when moving in three different directions. 
+
+The code then checks the direction in which the snake is moving. If the direction is up, the code checks 
+if the snake can move up, left, or right. It first checks if the snake can move up. If it can move up, it 
+checks if there are any body parts blocking the way. If there are no body parts blocking the way, it calculates 
+the estimated cost of moving up to the goal position. The estimated cost is calculated by adding the distance 
+between the current position and the goal position in the x and y directions, multiplied by 10, to the heuristic 
+cost hCostA. The heuristic cost hCostA is set to 4 if the distance in the y direction is not zero. The total 
+cost fCostA is then calculated by adding the heuristic cost hCostA and the cost of moving up, which is 10.
+
+The code then checks if the snake can move left or right, and if it can, it calculates the estimated cost 
+of moving in that direction and the total cost of moving in that direction. Finally, the code checks which 
+direction has the lowest total cost and sets the direction of the snake accordingly.
+
+If the snake is moving down, the code follows a similar procedure as for moving up. The code checks if the 
+snake can move down, left, or right. If it can move down, it calculates the estimated cost of moving down 
+to the goal position. The heuristic cost hCostA is set to 4 if the distance in the y direction is not zero. 
+The total cost fCostA is then calculated by adding the heuristic cost hCostA and the cost of moving down, 
+which is 10. The code then checks if the snake can move left or right, and if it can, it calculates the 
+estimated cost of moving in that direction and the total cost of moving in that direction. Finally, the code 
+checks which direction has the lowest total cost and sets the direction of the snake accordingly.
+
+The code updates the fCostA, fCostB, and fCostC variables to their initial values at the end of the pathFinder 
+method, ready for the next iteration.
+ */
 	private void pathFinder() {
 		int hCostA = 0;
 		int hCostB = 0;
@@ -344,9 +359,9 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 				direction = 'R';
 			}
 			// Reinitializing fCost to a large number after switching the direction
-			fCostA = 999999999;
-			fCostB = 999999999;
-			fCostC = 999999999;
+			fCostA = Integer.MAX_VALUE;
+			fCostB = Integer.MAX_VALUE;
+			fCostC = Integer.MAX_VALUE;
 			
 			break;
 		
@@ -444,9 +459,9 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 				direction = 'R';
 			}
 			// Reinitializing fCost to a large number after switching the direction
-			fCostA = 999999999;
-			fCostB = 999999999;
-			fCostC = 999999999;
+			fCostA = Integer.MAX_VALUE;
+			fCostB = Integer.MAX_VALUE;
+			fCostC = Integer.MAX_VALUE;
 			
 			break;
 		
@@ -544,9 +559,9 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 				direction = 'U';
 			}
 			// Reinitializing fCost to a large number after switching the direction
-			fCostA = 999999999;
-			fCostB = 999999999;
-			fCostC = 999999999;
+			fCostA = Integer.MAX_VALUE;
+			fCostB = Integer.MAX_VALUE;
+			fCostC = Integer.MAX_VALUE;
 			
 			break;
 		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -643,9 +658,9 @@ public class AStarAIPanel extends JPanel implements ActionListener {
 				direction = 'U';
 			}
 			// Reinitializing fCost to a large number after switching the direction
-			fCostA = 999999999;
-			fCostB = 999999999;
-			fCostC = 999999999;
+			fCostA = Integer.MAX_VALUE;
+			fCostB = Integer.MAX_VALUE;
+			fCostC = Integer.MAX_VALUE;
 			
 			break;
 		}
