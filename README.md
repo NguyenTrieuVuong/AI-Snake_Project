@@ -40,11 +40,11 @@ A* là thuật toán tìm kiếm trong đồ thị, thuật toán sẽ tìm mộ
 
 
 ## Kết Luận: 
-  + Nhận xét: - Bảng thống kê 20 lần chạy của 2 chế độ rắn tự động:
+Nhận xét: - Bảng thống kê 20 lần chạy của 2 chế độ rắn tự động:
  
   ![Thống kê 20 lần 2 chế độ](images/20_times_running_2_mode.png)
   
-  + Ưu điểm: 
+Ưu điểm: 
   
  - Chế độ chơi thú vị và chân thật: Tạo trò chơi rắn ăn mồi tự động sử dụng thuật toán A* giúp tạo ra một trò chơi thú vị, có tính thử thách và giống như chơi với người thật.
   
@@ -54,7 +54,7 @@ A* là thuật toán tìm kiếm trong đồ thị, thuật toán sẽ tìm mộ
             
  - Thêm thành công chế độ rắn đi qua bức tường và xuất hiện ở tường bên kia, góp phần giảm đi xác suất game over mỗi khi bị kẹp giữa thân rắn và biên của hộp.
             
-  + Nhược điểm: 
+Nhược điểm: 
 
 - Tính tương đối khó điều chỉnh: Thuật toán A* thuộc loại đường đi ngắn nhất và không dễ dàng thay đổi được thuật toán và sửa đổi, điều này làm cho trò chơi rắn săn mồi tự động dùng thuật toán A* cũng khó được thay đổi. 
 
