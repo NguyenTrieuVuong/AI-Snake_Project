@@ -40,14 +40,28 @@ A* là thuật toán tìm kiếm trong đồ thị, thuật toán sẽ tìm mộ
 
 
 ## Kết Luận: 
-  + Nhận xét: - Bảng thống kê 20 lần chạy của 2 chế độ rắn tự động:
- + Ưu / nhược điểm:
-  + ưu điểm: - Chế độ chơi thú vị và chân thật: Tạo trò chơi rắn ăn mồi tự động sử dụng thuật toán A* giúp tạo ra một trò chơi thú vị, có tính thử thách và giống như                  chơi với người thật.
-             - Tăng khả năng tư duy của người chơi: Trò chơi này đòi hỏi người chơi có khả năng suy nghĩ logic, tính toán, đặc biệt là phát triển khả năng giải quyết                  vấn đề.
-             - Tăng cường tính tương tác: Trò chơi cho phép người chơi tương tác với môi trường, tạo ra lối chơi tự do, góp phần giúp người chơi thoải mái thư giãn và                giải trí.
-             - Thêm thành công chế độ rắn đi qua bức tường và xuất hiện ở tường bên kia, góp phần giảm đi xác suất game over mỗi khi bị kẹp giữa thân rắn và biên của hộp.
-  + nhược điểm: - Tính tương đối khó điều chỉnh: Thuật toán A* thuộc loại đường đi ngắn nhất và không dễ dàng thay đổi được thuật toán và sửa đổi, điều này làm cho trò chơi rắn săn mồi tự động dùng thuật toán A* cũng khó được thay đổi. - Độ khó tăng nhanh: Trò chơi rắn săn mồi tự động dùng thuật toán A* có độ khó tăng lên rất nhanh, đặc biệt là ở những cấp độ sau (khi thân rắn dài ra), do đó tổng thời gian chơi của người chơi cũng sẽ ngắn hơn.
-                - Do tìm đường tốt nhất đến mồi nó xác xuất cao khiến con rắn đi vào đường cùng và cắn vào đuôi/ thân chính mình.
+Nhận xét: - Bảng thống kê 20 lần chạy của 2 chế độ rắn tự động:
+ 
+  ![Thống kê 20 lần 2 chế độ](images/20_times_running_2_mode.png)
+  
+Ưu điểm: 
+  
+ - Chế độ chơi thú vị và chân thật: Tạo trò chơi rắn ăn mồi tự động sử dụng thuật toán A* giúp tạo ra một trò chơi thú vị, có tính thử thách và giống như chơi với người thật.
+  
+- Tăng khả năng tư duy của người chơi: Trò chơi này đòi hỏi người chơi có khả năng suy nghĩ logic, tính toán, đặc biệt là phát triển khả năng giải quyết vấn đề.
+          
+ - Tăng cường tính tương tác: Trò chơi cho phép người chơi tương tác với môi trường, tạo ra lối chơi tự do, góp phần giúp người chơi thoải mái thư giãn và giải trí.
+            
+ - Thêm thành công chế độ rắn đi qua bức tường và xuất hiện ở tường bên kia, góp phần giảm đi xác suất game over mỗi khi bị kẹp giữa thân rắn và biên của hộp.
+            
+Nhược điểm: 
+
+- Tính tương đối khó điều chỉnh: Thuật toán A* thuộc loại đường đi ngắn nhất và không dễ dàng thay đổi được thuật toán và sửa đổi, điều này làm cho trò chơi rắn săn mồi tự động dùng thuật toán A* cũng khó được thay đổi. 
+
+- Độ khó tăng nhanh: Trò chơi rắn săn mồi tự động dùng thuật toán A* có độ khó tăng lên rất nhanh, đặc biệt là ở những cấp độ sau (khi thân rắn dài ra), do đó tổng thời gian chơi của người chơi cũng sẽ ngắn hơn.
+ 
+- Do tìm đường tốt nhất đến mồi nó xác xuất cao khiến con rắn đi vào đường cùng và cắn vào đuôi/ thân chính mình.
+
 ## Tài liệu tham khảo:
   + Project đã làm trong môn 'Lập trình hướng đối tượng': https://github.com/NguyenTrieuVuong/SnakeGame
   + https://github.com/Yellowatch/Java-Snake-Game
