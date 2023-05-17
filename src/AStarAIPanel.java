@@ -345,7 +345,7 @@ Some variables used in the code are:
 								exists = true;
 							}
 						} else {
-							continue;
+							continue;// Ignore until the head of the snake touch its body (snake is blocked), game over
 						}
 					} else if (current.getDirection() == 'L') { // Continue Left
 						if (!isBlocked(current.getDirection(), current.getxAxis() - UNIT_SIZE, current.getyAxis())) {
@@ -354,7 +354,7 @@ Some variables used in the code are:
 								exists = true;
 							}
 						} else {
-							continue;
+							continue;// Ignore until the head of the snake touch its body (snake is blocked), game over
 						}
 					} else if (current.getDirection() == 'D') { // Continue Down
 						if (!isBlocked(current.getDirection(), current.getxAxis(), current.getyAxis() + UNIT_SIZE)) {
@@ -363,7 +363,7 @@ Some variables used in the code are:
 								exists = true;
 							}
 						} else {
-							continue;
+							continue;// Ignore until the head of the snake touch its body (snake is blocked), game over
 						}
 					} else { // Continue Up
 						if(!isBlocked(current.getDirection(), current.getxAxis(), current.getyAxis() - UNIT_SIZE)) {
@@ -372,7 +372,7 @@ Some variables used in the code are:
 								exists = true;
 							}
 						} else {
-							continue;
+							continue;// Ignore until the head of the snake touch its body (snake is blocked), game over
 						}
 					}
 				} else if (i == 1) {
@@ -383,7 +383,7 @@ Some variables used in the code are:
 								exists = true;
 							}
 						} else {
-							continue;
+							continue;// Ignore until the head of the snake touch its body (snake is blocked), game over
 						}
 					} else if (current.getDirection() == 'L') { // Turn Up
 						if(!isBlocked('U', current.getxAxis(), current.getyAxis() - UNIT_SIZE)) {
@@ -392,7 +392,7 @@ Some variables used in the code are:
 								exists = true;
 							}
 						} else {
-							continue;
+							continue;// Ignore until the head of the snake touch its body (snake is blocked), game over
 						}
 					} else if (current.getDirection() == 'D') { // Turn Left
 						if(!isBlocked('L', current.getxAxis() - UNIT_SIZE, current.getyAxis())) {
@@ -401,7 +401,7 @@ Some variables used in the code are:
 								exists = true;
 							}
 						} else {
-							continue;
+							continue;// Ignore until the head of the snake touch its body (snake is blocked), game over
 						}
 					} else { // Turn Right
 						if(!isBlocked('R', current.getxAxis() + UNIT_SIZE, current.getyAxis())) {
@@ -410,7 +410,7 @@ Some variables used in the code are:
 								exists = true;
 							}
 						} else {
-							continue;
+							continue;// Ignore until the head of the snake touch its body (snake is blocked), game over
 						}
 					}
 				} else {
@@ -421,7 +421,7 @@ Some variables used in the code are:
 								exists = true;
 							}
 						} else {
-							continue;
+							continue;// Ignore until the head of the snake touch its body (snake is blocked), game over
 						}
 					} else if (current.getDirection() == 'L') { // Turn Down
 						if(!isBlocked('D', current.getxAxis(), current.getyAxis() + UNIT_SIZE)) {
@@ -430,7 +430,7 @@ Some variables used in the code are:
 								exists = true;
 							}
 						} else {
-							continue;
+							continue;// Ignore until the head of the snake touch its body (snake is blocked), game over
 						}
 					} else if (current.getDirection() == 'D') { // Turn Right
 						if(!isBlocked('R', current.getxAxis() + UNIT_SIZE, current.getyAxis())) {
@@ -439,7 +439,7 @@ Some variables used in the code are:
 								exists = true;
 							}
 						} else {
-							continue;
+							continue;// Ignore until the head of the snake touch its body (snake is blocked), game over
 						}
 					} else { // Turn Left
 						if(!isBlocked('L', current.getxAxis() - UNIT_SIZE, current.getyAxis())) {
@@ -448,7 +448,7 @@ Some variables used in the code are:
 								exists = true;
 							}
 						} else {
-							continue;
+							continue;// Ignore until the head of the snake touch its body (snake is blocked), game over
 						}
 					}
 				}
@@ -457,6 +457,7 @@ Some variables used in the code are:
 					continue;
 				}
 				
+				// calculate gCost
 				if (n.getFCost() <= current.getFCost() || !open.contains(n)) {
 					n.setParent(current);
 					if (!open.contains(n)) {
@@ -630,9 +631,9 @@ the lowest f-cost, updates the character's direction, and resets the f-cost vari
 				direction = 'R';
 			}
 			// Reinitializing fCost to a large number after switching the direction
-			fCostA = 999999999;
-			fCostB = 999999999;
-			fCostC = 999999999;
+			fCostA = Integer.MAX_VALUE;
+			fCostB = Integer.MAX_VALUE;
+			fCostC = Integer.MAX_VALUE;
 			
 			break;
 		
@@ -730,9 +731,9 @@ the lowest f-cost, updates the character's direction, and resets the f-cost vari
 				direction = 'R';
 			}
 			// Reinitializing fCost to a large number after switching the direction
-			fCostA = 999999999;
-			fCostB = 999999999;
-			fCostC = 999999999;
+			fCostA = Integer.MAX_VALUE;
+			fCostB = Integer.MAX_VALUE;
+			fCostC = Integer.MAX_VALUE;
 			
 			break;
 		
@@ -830,9 +831,9 @@ the lowest f-cost, updates the character's direction, and resets the f-cost vari
 				direction = 'U';
 			}
 			// Reinitializing fCost to a large number after switching the direction
-			fCostA = 999999999;
-			fCostB = 999999999;
-			fCostC = 999999999;
+			fCostA = Integer.MAX_VALUE;
+			fCostB = Integer.MAX_VALUE;
+			fCostC = Integer.MAX_VALUE;
 			
 			break;
 		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -929,9 +930,9 @@ the lowest f-cost, updates the character's direction, and resets the f-cost vari
 				direction = 'U';
 			}
 			// Reinitializing fCost to a large number after switching the direction
-			fCostA = 999999999;
-			fCostB = 999999999;
-			fCostC = 999999999;
+			fCostA = Integer.MAX_VALUE;
+			fCostB = Integer.MAX_VALUE;
+			fCostC = Integer.MAX_VALUE;
 			
 			break;
 		}
