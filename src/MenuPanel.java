@@ -30,14 +30,6 @@ public class MenuPanel extends JPanel {
 		setBackground(Color.BLUE);
 		setLayout(null);
 		
-		// JButton sAI = new JButton("Single AI");
-		// sAI.setLayout(null);
-		// sAI.setBounds((width / 2) - 100, (height / 4) + 250 - 30, 200, 60);
-		// sAI.setBackground(Color.GREEN);
-		// sAI.setBorder(BorderFactory.createBevelBorder(0));
-		// sAI.addActionListener(new SingleAIListener(frame));
-		// add(sAI);
-		
 		JButton Astar = new JButton("Play AI");
 		Astar.setLayout(null);
 		Astar.setBounds((width / 2) - 100, (height / 4) + 325 - 30, 200, 60);
