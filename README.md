@@ -40,9 +40,8 @@ A* là thuật toán tìm kiếm trong đồ thị, thuật toán sẽ tìm mộ
 
 
 ## Kết Luận: 
-Nhận xét: - Bảng thống kê 20 lần chạy của 2 chế độ rắn tự động:
+Nhận xét: 
  
-  ![Thống kê 20 lần 2 chế độ](images/20_times_running_2_mode.png)
   
 Ưu điểm: 
   
