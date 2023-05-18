@@ -6,7 +6,7 @@
   + Nguyễn Triệu Vương
   + Nguyễn Bá Kiên
 ## Cách sử dụng:
-Clone repo về, sau đó vào src/App.java và chạy. Khi bắt đầu chạy, cửa sổ giao diện chính hiện lên, người chơi chỉ cần nhấn vào nút "Play AI" màu xanh lục, chuyển sang cửa sổ mà ở đó rắn tự chuyển động đến mồi, người chơi chỉ cần xem rắn đi tự động ăn được bao điểm, cho đến khi rắn cắn thân nó, nghĩa là trò chơi kết thúc, một cửa sổ Game Over hiện ra, cho phép người chơi nhấn "Play Again" để chơi lại.
+Clone repo về, sau đó vào src/App.java và chạy. Khi bắt đầu chạy, cửa sổ giao diện chính hiện lên, người chơi chỉ cần nhấn vào nút "Play AI" màu xanh lục, chuyển sang cửa sổ mà ở đó rắn tự chuyển động đến mồi, người chơi chỉ cần xem rắn đi tự động ăn được bao điểm, cho đến khi rắn cắn thân nó, nghĩa là trò chơi kết thúc, một cửa sổ Game Over hiện ra, cho phép người chơi nhấn "Play Again?" để chơi lại.
 
 Lưu ý, class quan trọng nhất là 'AStarAIPanel' đã được chèn docstring java comment giải thích kỹ lưỡng mỗi function.
 ## Giới thiệu:
