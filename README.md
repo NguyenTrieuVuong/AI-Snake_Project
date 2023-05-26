@@ -6,13 +6,15 @@
   + Nguyễn Triệu Vương
   + Nguyễn Bá Kiên
 ## Cách sử dụng:
-Clone repo về, sau đó vào src/App.java và chạy.
+Clone repo về, sau đó vào src/App.java và chạy. Khi bắt đầu chạy, cửa sổ giao diện chính hiện lên, người chơi chỉ cần nhấn vào nút "Play AI" màu xanh lục, chuyển sang cửa sổ mà ở đó rắn tự chuyển động đến mồi, người chơi chỉ cần xem rắn đi tự động ăn được bao điểm, cho đến khi rắn cắn thân nó, nghĩa là trò chơi kết thúc, một cửa sổ Game Over hiện ra, cho phép người chơi nhấn "Play Again?" để chơi lại.
+
+Lưu ý, class quan trọng nhất là 'AStarAIPanel' đã được chèn docstring java comment giải thích kỹ lưỡng mỗi function.
 ## Giới thiệu:
 Trò chơi con rắn là một trò chơi phổ biến cách đây khoảng mười năm cũng là một trò chơi yêu thích của chúng tôi vì thế chúng tôi đã kết hợp trò chơi yêu thích và ngành học để tái hiện lại trò chơi con rắn.
 
 ## Ý tưởng: 
 - Phát triển từ sản phẩm game rắn săn mồi đã được làm trong môn Lập trình hướng đối tượng.
-- Dùng thuật toán tìm kiếm A* tạo game rắn tự động. Con rắn được bao quanh bởi 4 biên trò chơi, mồi mới xuất hiện ngẫu nhiên 1 vị trí sau khi rắn ăn mồi cũ. Trò chơi kết thúc khi rắn đâm vào biên hoặc đâm vào thân/đuôi chính mình. Mục tiêu của chúng tôi là trò chơi con rắn chơi được ở chế độ máy chơi. Chúng tôi áp dụng tìm kiếm A* trong bài để tìm kiếm.
+- Dùng thuật toán tìm kiếm A* tạo game rắn tự động. Con rắn được bao quanh bởi 4 bức tường, mồi mới xuất hiện ngẫu nhiên 1 vị trí sau khi rắn ăn mồi cũ. Trò chơi kết thúc khi rắn đâm vào bức tường hoặc đâm vào thân/đuôi chính mình. Mục tiêu của chúng tôi là trò chơi con rắn chơi được ở chế độ máy chơi. Chúng tôi áp dụng tìm kiếm A* trong bài để tìm kiếm.
 
 ## Tìm kiếm A* là gì? (A* algorithm)
 A* là thuật toán tìm kiếm trong đồ thị, thuật toán sẽ tìm một đường tối ưu nhất từ vị trí ban đầu đến vị trí đích. Thuật toán sử dụng "đánh giá heurstic" để sắp xếp từng loại từng điểm đến để đến vị trị tốt nhất. Thuật toán sẽ duyệt qua các vị trí đích đích theo đánh giá của heuristic này.
@@ -51,7 +53,7 @@ Nhận xét:
           
  - Tăng cường tính tương tác: Trò chơi cho phép người chơi tương tác với môi trường, tạo ra lối chơi tự do, góp phần giúp người chơi thoải mái thư giãn và giải trí.
             
- - Thêm thành công chế độ rắn đi qua biên và xuất hiện ở biên bên kia, góp phần giảm đi xác suất game over mỗi khi bị kẹp giữa thân rắn và biên của trò chơi.
+ - Thêm thành công chế độ rắn đi qua bức tường và xuất hiện ở tường bên kia, góp phần giảm đi xác suất game over mỗi khi bị kẹp giữa thân rắn và biên của hộp.
             
 Nhược điểm: 
 
