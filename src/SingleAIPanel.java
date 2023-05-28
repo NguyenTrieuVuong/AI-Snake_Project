@@ -328,10 +328,9 @@ public class SingleAIPanel extends JPanel implements ActionListener {
 						fCostA = hCostA + 10;
 					}
 					blocked = false;
+				} else if (y[0] - UNIT_SIZE < 0) {
+					y[0] = SCREEN_HEIGHT;
 				}
-				// else if (y[0] - UNIT_SIZE < 0) {
-				// y[0] = SCREEN_HEIGHT - UNIT_SIZE;
-				// }
 
 				// If space to go left
 				if (x[0] - UNIT_SIZE >= 0) {
@@ -445,10 +444,9 @@ public class SingleAIPanel extends JPanel implements ActionListener {
 						fCostA = hCostA + 10;
 					}
 					blocked = false;
+				} else if (y[0] + UNIT_SIZE >= SCREEN_HEIGHT) {
+					y[0] = 0;
 				}
-				// else if (y[0] + UNIT_SIZE >= SCREEN_HEIGHT) {
-				// y[0] = 0;
-				// }
 
 				// If space to go left
 				if (x[0] - UNIT_SIZE >= 0) {
@@ -547,10 +545,9 @@ public class SingleAIPanel extends JPanel implements ActionListener {
 						fCostA = hCostA + 10;
 					}
 					blocked = false;
+				} else if (x[0] - UNIT_SIZE < 0) {
+					x[0] = SCREEN_WIDTH;
 				}
-				// else if (x[0] - UNIT_SIZE < 0) {
-				// x[0] = SCREEN_WIDTH - UNIT_SIZE;
-				// }
 
 				// If space to go down
 				if (y[0] + UNIT_SIZE < SCREEN_HEIGHT) {
@@ -648,10 +645,9 @@ public class SingleAIPanel extends JPanel implements ActionListener {
 						fCostA = hCostA + 10;
 					}
 					blocked = false;
+				} else if (x[0] + UNIT_SIZE >= SCREEN_WIDTH) {
+					x[0] = 0;
 				}
-				// else if (x[0] + UNIT_SIZE >= SCREEN_WIDTH) {
-				// x[0] = 0;
-				// }
 
 				// If space to go down
 				if (y[0] + UNIT_SIZE < SCREEN_HEIGHT) {
