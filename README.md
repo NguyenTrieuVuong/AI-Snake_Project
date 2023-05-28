@@ -45,7 +45,7 @@ A* là thuật toán tìm kiếm trong đồ thị, thuật toán sẽ tìm mộ
 Nhận xét: 
 Đây là bảng đánh giá kết quả sau 20 lần chạy thử:
 
-![20_times_running_2_mode](20_times_running_2_mode.png)
+![20_lần chạy 2 mode](images/20_times_running_2_mode.png)
   
 Ưu điểm: 
   
