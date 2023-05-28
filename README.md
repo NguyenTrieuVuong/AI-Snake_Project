@@ -63,7 +63,7 @@ Nhược điểm:
 
 - Độ khó tăng nhanh: Trò chơi rắn săn mồi tự động dùng thuật toán A* có độ khó tăng lên rất nhanh, đặc biệt là ở những cấp độ sau (khi thân rắn dài ra), do đó tổng thời gian chơi của người chơi cũng sẽ ngắn hơn.
  
-- Do tìm đường tốt nhất đến mồi nó xác xuất cao khiến con rắn đi vào đường cùng và cắn vào đuôi/ thân chính mình.
+- Do tìm đường tốt nhất đến mồi nó xác suất cao khiến con rắn đi vào đường cùng và cắn vào đuôi/ thân chính mình.
 
 ## Tài liệu tham khảo:
   + Project đã làm trong môn 'Lập trình hướng đối tượng': https://github.com/NguyenTrieuVuong/SnakeGame
